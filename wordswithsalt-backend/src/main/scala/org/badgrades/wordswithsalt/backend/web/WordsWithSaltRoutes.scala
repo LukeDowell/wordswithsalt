@@ -4,8 +4,14 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.stream.ActorMaterializer
+import com.typesafe.scalalogging.StrictLogging
+import org.badgrades.wordswithsalt.backend.actor.SaltyWordDataActor
+import org.badgrades.wordswithsalt.backend.actor.SaltyWordDataActor.WriteWord
+import org.badgrades.wordswithsalt.backend.domain.SaltyWord
 
-trait WordsWithSaltRoutes {
+import scala.language.postfixOps
+
+trait WordsWithSaltRoutes { this: StrictLogging =>
   implicit val actorSystem: ActorSystem
   implicit val actorMaterializer: ActorMaterializer
 
@@ -22,8 +28,9 @@ trait WordsWithSaltRoutes {
             complete("word by phrase")
           }
         } ~
-        parameters(('id.as[Long]?, 'phrase.as[String], 'description.as[String])) { (id, phrase, description) =>
+        parameters(('id.as[String]?, 'phrase.as[String], 'description.as[String])) { (id, phrase, description) =>
           post {
+            actorSystem.actorOf(SaltyWordDataActor.props) ! WriteWord(SaltyWord(phrase, description))
             complete("add word")
           } ~
           put {

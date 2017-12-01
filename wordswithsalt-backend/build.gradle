@@ -4,8 +4,8 @@ apply plugin: 'application'
 mainClassName = 'org.badgrades.wordswithsalt.backend.Application'
 
 dependencies {
+    compile group: 'com.google.firebase', name: 'firebase-admin', version: firebaseVersion
     compile group: 'org.slf4j', name: 'slf4j-simple', version: slf4jVersion
-    compile group: 'com.h2database', name: 'h2', version: h2Version
     compile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
     compile group: 'com.typesafe.scala-logging', name: "scala-logging_$scalaMajorVersion", version: scalaLoggingVersion
     compile group: 'com.typesafe.akka', name: "akka-actor_$scalaMajorVersion", version: akkaVersion
