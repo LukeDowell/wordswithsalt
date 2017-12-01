@@ -1,19 +1,22 @@
 package org.badgrades.wordswithsalt.backend.web
 
-import akka.actor.ActorSystem
+import akka.actor.{ActorRef, ActorSystem}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.stream.ActorMaterializer
+import akka.util.Timeout
 import com.typesafe.scalalogging.StrictLogging
-import org.badgrades.wordswithsalt.backend.actor.SaltyWordDataActor
 import org.badgrades.wordswithsalt.backend.actor.SaltyWordDataActor.WriteWord
 import org.badgrades.wordswithsalt.backend.domain.SaltyWord
 
+import scala.concurrent.duration._
 import scala.language.postfixOps
 
 trait WordsWithSaltRoutes { this: StrictLogging =>
   implicit val actorSystem: ActorSystem
   implicit val actorMaterializer: ActorMaterializer
+  implicit val timeout: Timeout = 1 second
+  implicit val saltyWordDataActor: ActorRef
 
   val routes: Route =
     logRequestResult("wordsWithSalt", akka.event.Logging.InfoLevel) {
@@ -30,7 +33,7 @@ trait WordsWithSaltRoutes { this: StrictLogging =>
         } ~
         parameters(('id.as[String]?, 'phrase.as[String], 'description.as[String])) { (id, phrase, description) =>
           post {
-            actorSystem.actorOf(SaltyWordDataActor.props) ! WriteWord(SaltyWord(phrase, description))
+            saltyWordDataActor ! WriteWord(SaltyWord(phrase, description))
             complete("add word")
           } ~
           put {

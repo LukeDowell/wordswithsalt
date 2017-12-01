@@ -15,6 +15,7 @@ case class SaltyWord(
 }
 
 class SaltyWordBean() {
+  @BeanProperty var id: String = _
   @BeanProperty var phrase: String = _
   @BeanProperty var description: String = _
   def toCase: SaltyWord = SaltyWord(phrase, description)
