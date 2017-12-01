@@ -33,7 +33,6 @@ object SaltyWordDataActor {
 
   sealed trait SaltyWordDataMessage
   case class GetWordById(id: String) extends SaltyWordDataMessage
-  case class GetWordByPhrase(phrase: String) extends SaltyWordDataMessage
   case class UpdateWordById(id: String) extends SaltyWordDataMessage
   case class WriteWord(saltyWord: SaltyWord) extends SaltyWordDataMessage
   case class FoundWord(id: String, saltyWord: SaltyWord) extends SaltyWordDataMessage

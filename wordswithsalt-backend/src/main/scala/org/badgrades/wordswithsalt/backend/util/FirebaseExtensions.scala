@@ -5,7 +5,7 @@ import com.google.api.core._
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.language.implicitConversions
 
-object FirebaseConversions {
+object FirebaseExtensions {
   implicit def firebaseFutureToScalaFuture[T](apiFuture: ApiFuture[T])(implicit ec: ExecutionContext): Future[T] = {
     val promise = Promise[T]()
     ApiFutures.addCallback(
