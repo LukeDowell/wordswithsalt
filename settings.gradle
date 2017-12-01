@@ -1,0 +1,4 @@
+rootProject.name = 'wordswithsalt-parent'
+
+include 'pruebas-grandes'
+include 'wordswithsalt-backend'

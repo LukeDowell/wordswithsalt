@@ -1,0 +1,6 @@
+apply plugin: 'scala'
+
+dependencies {
+    compile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
+//    compile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
+}

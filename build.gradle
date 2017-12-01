@@ -1,0 +1,26 @@
+ext {
+    akkaVersion = '2.5.6'
+    akkaHttpVersion = '10.0.10'
+    akkaTestKitVersion = '2.5.6'
+    scalaVersion = '2.12.2'
+    scalaMajorVersion = '2.12'
+    scalaLoggingVersion = '3.7.2'
+    scalaTestVersion = '3.0.4'
+    gatlingVersion = '2.2.2'
+    mockitoVersion = '1.10.19'
+    h2Version = '1.4.196'
+    slf4jVersion = '1.7.25'
+}
+
+allprojects {
+    version = '0.0.1-SNAPSHOT'
+    group = 'org.badgrades'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.5'
+}
