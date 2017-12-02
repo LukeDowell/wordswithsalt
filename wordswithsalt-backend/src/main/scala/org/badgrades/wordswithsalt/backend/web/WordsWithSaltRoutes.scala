@@ -9,7 +9,6 @@ import akka.stream.ActorMaterializer
 import akka.util.Timeout
 import com.typesafe.scalalogging.StrictLogging
 import org.badgrades.wordswithsalt.backend.actor.SaltyWordDataActor.{FoundWord, GetRandomWord, GetWordById, WriteWord}
-import org.badgrades.wordswithsalt.backend.actor.SaltyWordFirebaseActor.FirebaseError
 
 import scala.concurrent.duration._
 import scala.language.postfixOps

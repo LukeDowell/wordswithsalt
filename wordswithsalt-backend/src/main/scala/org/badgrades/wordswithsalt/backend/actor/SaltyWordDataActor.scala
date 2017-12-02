@@ -1,7 +1,7 @@
 package org.badgrades.wordswithsalt.backend.actor
 
 import akka.actor.{Actor, ActorLogging, Props, Terminated}
-import akka.routing.{ActorRefRoutee, Router, SmallestMailboxRoutingLogic}
+import akka.routing.{ActorRefRoutee, RoundRobinRoutingLogic, Router}
 import org.badgrades.wordswithsalt.backend.domain.SaltyWord
 
 class SaltyWordDataActor extends Actor with ActorLogging {
@@ -13,7 +13,7 @@ class SaltyWordDataActor extends Actor with ActorLogging {
       context watch r
       ActorRefRoutee(r)
     }
-    Router(SmallestMailboxRoutingLogic(), routees)
+    Router(RoundRobinRoutingLogic(), routees)
   }
 
   override def receive: Receive = {
