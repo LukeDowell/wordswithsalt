@@ -14,7 +14,7 @@ object Application extends WordsWithSaltRoutes with StrictLogging {
   implicit val actorSystem: ActorSystem = ActorSystem("wordsWithSaltSystem")
   implicit val actorMaterializer: ActorMaterializer = ActorMaterializer()
   implicit val ec: ExecutionContext = actorSystem.dispatcher
-  implicit val saltyWordDataActor: ActorRef = actorSystem.actorOf(SaltyWordDataActor.props)
+  implicit val saltyWordDataActor: ActorRef = actorSystem.actorOf(SaltyWordDataActor.props, SaltyWordDataActor.Name)
 
   def main(args: Array[String]): Unit = {
     val bindingFuture = Http().bindAndHandle(

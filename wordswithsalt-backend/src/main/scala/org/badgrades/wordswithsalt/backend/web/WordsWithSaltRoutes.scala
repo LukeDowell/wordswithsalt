@@ -1,14 +1,15 @@
 package org.badgrades.wordswithsalt.backend.web
 
-import akka.pattern.ask
 import akka.actor.{ActorRef, ActorSystem}
+import akka.http.scaladsl.model.{HttpResponse, StatusCodes}
 import akka.http.scaladsl.server.Directives._
-import akka.http.scaladsl.server.Route
+import akka.http.scaladsl.server.{ExceptionHandler, Route}
+import akka.pattern.ask
 import akka.stream.ActorMaterializer
 import akka.util.Timeout
 import com.typesafe.scalalogging.StrictLogging
-import org.badgrades.wordswithsalt.backend.actor.SaltyWordDataActor.{FoundWord, GetWordById, WriteWord}
-import org.badgrades.wordswithsalt.backend.domain.SaltyWord
+import org.badgrades.wordswithsalt.backend.actor.SaltyWordDataActor.{FoundWord, GetRandomWord, GetWordById, WriteWord}
+import org.badgrades.wordswithsalt.backend.actor.SaltyWordFirebaseActor.FirebaseError
 
 import scala.concurrent.duration._
 import scala.language.postfixOps
@@ -24,15 +25,15 @@ trait WordsWithSaltRoutes extends JsonSupport { this: StrictLogging =>
       path("word") {
         parameters('id.as[String]) { id =>
           get {
-            val saltyWord = (saltyWordDataActor ? GetWordById(id)).mapTo[FoundWord]
-            onSuccess(saltyWord) { foundWord =>
-              complete(foundWord.saltyWord)
+            val wordResultFuture = (saltyWordDataActor ? GetWordById(id)).mapTo[FoundWord]
+            onSuccess(wordResultFuture) { wordResult =>
+              complete(wordResult.saltyWord)
             }
           }
         } ~
         parameters(('id.as[String]?, 'phrase.as[String], 'description.as[String])) { (id, phrase, description) =>
           post {
-            saltyWordDataActor ! WriteWord(SaltyWord(phrase, description))
+            saltyWordDataActor ! WriteWord(phrase, description)
             complete("add word")
           } ~
           put {
@@ -40,7 +41,10 @@ trait WordsWithSaltRoutes extends JsonSupport { this: StrictLogging =>
           }
         } ~
         get {
-          complete("random word")
+          val wordResultFuture = (saltyWordDataActor ? GetRandomWord).mapTo[FoundWord]
+          onSuccess(wordResultFuture) { wordResult =>
+            complete(wordResult.saltyWord)
+          }
         }
       } ~
       pathSingleSlash {
@@ -49,4 +53,13 @@ trait WordsWithSaltRoutes extends JsonSupport { this: StrictLogging =>
         }
       }
     }
+
+  implicit def exceptionHandler: ExceptionHandler = ExceptionHandler {
+    case unknown =>
+      logger.error(s"Unknown exception! Message=${unknown.getMessage}", unknown)
+      complete(HttpResponse(
+        StatusCodes.InternalServerError,
+        entity = "The server has encountered an unexpected error. Please try again later."
+      ))
+  }
 }

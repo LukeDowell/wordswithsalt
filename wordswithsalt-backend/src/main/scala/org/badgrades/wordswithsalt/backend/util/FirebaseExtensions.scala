@@ -1,6 +1,7 @@
 package org.badgrades.wordswithsalt.backend.util
 
 import com.google.api.core._
+import com.google.firebase.database.{DataSnapshot, DatabaseError, ValueEventListener}
 
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.language.implicitConversions
@@ -17,4 +18,12 @@ object FirebaseExtensions {
     )
     promise.future
   }
+
+
+  class ValueHandler(dc: DataSnapshot => Unit, c: DatabaseError => Unit) extends ValueEventListener {
+    def onCancelled(error: DatabaseError): Unit = c(error)
+    def onDataChange(snapshot: DataSnapshot): Unit = dc(snapshot)
+  }
+  implicit def functionToValueHandler(t: (DataSnapshot => Unit, DatabaseError => Unit)): ValueHandler =
+    new ValueHandler(t._1, t._2)
 }

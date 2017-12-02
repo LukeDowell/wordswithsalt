@@ -7,5 +7,5 @@ import spray.json.RootJsonFormat
 trait JsonSupport extends SprayJsonSupport {
   import spray.json.DefaultJsonProtocol._
 
-  implicit val saltyWordFormat: RootJsonFormat[SaltyWord] = jsonFormat2(SaltyWord)
+  implicit val saltyWordFormat: RootJsonFormat[SaltyWord] = jsonFormat3(SaltyWord)
 }
