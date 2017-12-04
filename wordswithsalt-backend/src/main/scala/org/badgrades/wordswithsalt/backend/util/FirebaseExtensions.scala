@@ -18,12 +18,4 @@ object FirebaseExtensions {
     )
     promise.future
   }
-
-
-  class ValueHandler(dc: DataSnapshot => Unit, c: DatabaseError => Unit) extends ValueEventListener {
-    def onCancelled(error: DatabaseError): Unit = c(error)
-    def onDataChange(snapshot: DataSnapshot): Unit = dc(snapshot)
-  }
-  implicit def functionToValueHandler(t: (DataSnapshot => Unit, DatabaseError => Unit)): ValueHandler =
-    new ValueHandler(t._1, t._2)
 }

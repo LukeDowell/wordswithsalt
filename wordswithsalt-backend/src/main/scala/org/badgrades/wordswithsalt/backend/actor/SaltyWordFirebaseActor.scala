@@ -10,13 +10,12 @@ import scala.collection.JavaConverters._
 import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Random, Success}
 
-class SaltyWordFirebaseActor extends Actor with ActorLogging {
+class SaltyWordFirebaseActor(val db: FirebaseDatabase) extends Actor with ActorLogging {
   import SaltyWordDataActor._
   import SaltyWordFirebaseActor._
 
   implicit val ec: ExecutionContext = context.dispatcher
-  val db: FirebaseDatabase = FirebaseDatabase.getInstance(FirebaseConfig.app)
-  def dbWordRef: DatabaseReference = db.getReference(FirebaseWordPath)
+  def dbWordRef: DatabaseReference = db.getReference(FirebaseReferencePath)
 
   override def receive: Receive = {
     case WriteWord(phrase, description) =>
@@ -31,8 +30,12 @@ class SaltyWordFirebaseActor extends Actor with ActorLogging {
     case GetRandomWord =>
       log.info("Attempting to retrieve random word")
       val replyTo = sender()
-      dbWordRef.addValueEventListener((
-        { snapshot: DataSnapshot =>
+      dbWordRef.addValueEventListener(new ValueEventListener {
+        def onCancelled(error: DatabaseError): Unit = {
+          log.error(s"Error reading from Firebase. Code=${error.getCode}, Message=${error.getMessage}, Details=${error.getDetails}")
+          replyTo ! FirebaseError(error.getMessage)
+        }
+        def onDataChange(snapshot: DataSnapshot): Unit = {
           val words: Seq[SaltyWord] = snapshot
             .getChildren
             .asScala
@@ -47,18 +50,18 @@ class SaltyWordFirebaseActor extends Actor with ActorLogging {
           val randomWord = Random.shuffle(words).headOption
           if (randomWord.isDefined) replyTo ! FoundWord(randomWord.get)
           else replyTo ! WordNotFound
-        },
-        { error: DatabaseError =>
-          log.error(s"Error reading from Firebase. Code=${error.getCode}, Message=${error.getMessage}, Details=${error.getDetails}")
-          replyTo ! FirebaseError(error.getMessage)
         }
-      ))
+      })
 
     case GetAllWords =>
       log.info("Attempting to retrieve all words")
       val replyTo = sender()
-      dbWordRef.addValueEventListener((
-        { snapshot: DataSnapshot =>
+      dbWordRef.addValueEventListener(new ValueEventListener {
+        def onCancelled(error: DatabaseError): Unit = {
+          log.error(s"Error reading from Firebase. Code=${error.getCode}, Message=${error.getMessage}, Details=${error.getDetails}")
+          replyTo ! FirebaseError(error.getMessage)
+        }
+        def onDataChange(snapshot: DataSnapshot): Unit = {
           val words: Seq[SaltyWord] = snapshot
             .getChildren
             .asScala
@@ -67,31 +70,27 @@ class SaltyWordFirebaseActor extends Actor with ActorLogging {
                 val word = childSnapshot.getValue(classOf[SaltyWordBean])
                 word.id = childSnapshot.getKey
                 word.toCase
-              }
+            }
             .toSeq
           replyTo ! FoundAllWords(words)
-        },
-        { error: DatabaseError =>
-          log.error(s"Error reading from Firebase. Code=${error.getCode}, Message=${error.getMessage}, Details=${error.getDetails}")
-          replyTo ! FirebaseError(error.getMessage)
         }
-      ))
+      })
 
     case GetWordById(id) =>
       log.info(s"Attempting to retrieve word with id=$id")
       val replyTo = sender()
-      dbWordRef.child(id).addValueEventListener((
-        { snapshot: DataSnapshot =>
+      dbWordRef.addValueEventListener(new ValueEventListener {
+        def onCancelled(error: DatabaseError): Unit = {
+          log.error(s"Error reading from Firebase. Code=${error.getCode}, Message=${error.getMessage}, Details=${error.getDetails}")
+          replyTo ! FirebaseError(error.getMessage)
+        }
+        def onDataChange(snapshot: DataSnapshot): Unit = {
           val saltyWord = snapshot.getValue(classOf[SaltyWordBean])
           saltyWord.id = snapshot.getKey
           log.info(s"SaltyWord retrieved ${saltyWord.toCase}")
           replyTo ! FoundWord(saltyWord.toCase)
-        },
-        { error: DatabaseError =>
-          log.error(s"Error reading from Firebase. Code=${error.getCode}, Message=${error.getMessage}, Details=${error.getDetails}")
-          replyTo ! FirebaseError(error.getMessage)
         }
-      ))
+      })
 
     case UpdateWordById(id) =>
       log.info(s"Attempting to update word with id=$id")
@@ -99,8 +98,10 @@ class SaltyWordFirebaseActor extends Actor with ActorLogging {
 }
 
 object SaltyWordFirebaseActor {
-  def props: Props = Props[SaltyWordFirebaseActor]
-  val FirebaseWordPath = "/words"
+  def props(database: FirebaseDatabase = FirebaseDatabase.getInstance(FirebaseConfig.app)): Props =
+    Props(new SaltyWordFirebaseActor(database))
+
+  val FirebaseReferencePath = "/words"
 
   case class FirebaseError(error: String)
 }

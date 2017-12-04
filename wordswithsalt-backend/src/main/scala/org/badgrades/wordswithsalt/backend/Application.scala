@@ -10,7 +10,6 @@ import org.badgrades.wordswithsalt.backend.web.WordsWithSaltRoutes
 import scala.concurrent.ExecutionContext
 
 object Application extends WordsWithSaltRoutes with StrictLogging {
-
   implicit val actorSystem: ActorSystem = ActorSystem("wordsWithSaltSystem")
   implicit val actorMaterializer: ActorMaterializer = ActorMaterializer()
   implicit val ec: ExecutionContext = actorSystem.dispatcher

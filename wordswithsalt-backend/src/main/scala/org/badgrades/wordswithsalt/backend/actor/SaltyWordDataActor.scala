@@ -9,7 +9,7 @@ class SaltyWordDataActor extends Actor with ActorLogging {
 
   var router: Router = {
     val routees = Vector.fill(NumRoutees) {
-      val r = context.actorOf(SaltyWordFirebaseActor.props)
+      val r = context.actorOf(SaltyWordFirebaseActor.props())
       context watch r
       ActorRefRoutee(r)
     }
@@ -23,7 +23,7 @@ class SaltyWordDataActor extends Actor with ActorLogging {
     case Terminated(a) =>
       log.warning(s"Actor=${a.path} terminated, replacing...")
       router = router.removeRoutee(a)
-      val r = context.actorOf(SaltyWordFirebaseActor.props)
+      val r = context.actorOf(SaltyWordFirebaseActor.props())
       context watch r
       router = router.addRoutee(r)
   }
