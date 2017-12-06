@@ -1,4 +1,4 @@
-package org.badgrades.wordswithsalt.backend.actor
+package org.badgrades.wordswithsalt.backend.actor.word
 
 import akka.actor.{Actor, ActorLogging, Props}
 import com.google.firebase.database._

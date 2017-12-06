@@ -13,6 +13,7 @@ dependencies {
     compile group: 'com.typesafe.akka', name: "akka-slf4j_$scalaMajorVersion", version: akkaVersion
     compile group: 'com.typesafe.akka', name: "akka-http_$scalaMajorVersion", version: akkaHttpVersion
     compile group: 'com.typesafe.akka', name: "akka-http-spray-json_$scalaMajorVersion", version: akkaHttpVersion
+    compile group: 'com.typesafe.akka', name: "akka-cluster_$scalaMajorVersion", version: akkaClusterVersion
 
     testCompile group: 'org.scalatest', name: "scalatest_$scalaMajorVersion", version: scalaTestVersion
     testCompile group: 'com.typesafe.akka', name: "akka-testkit_$scalaMajorVersion", version: akkaTestKitVersion

@@ -9,6 +9,7 @@ import akka.stream.ActorMaterializer
 import akka.util.Timeout
 import com.typesafe.scalalogging.StrictLogging
 import org.badgrades.wordswithsalt.backend.actor.SaltyWordDataActor.{FoundWord, GetRandomWord, GetWordById, WriteWord}
+import org.badgrades.wordswithsalt.backend.actor.word.SaltyWordDataActor.{FoundWord, GetRandomWord, GetWordById, WriteWord}
 
 import scala.concurrent.duration._
 import scala.language.postfixOps
@@ -17,6 +18,7 @@ trait WordsWithSaltRoutes extends JsonSupport { this: StrictLogging =>
   implicit val actorSystem: ActorSystem
   implicit val actorMaterializer: ActorMaterializer
   implicit val timeout: Timeout = 3 seconds
+
   implicit val saltyWordDataActor: ActorRef
 
   val routes: Route =

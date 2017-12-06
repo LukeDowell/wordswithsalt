@@ -1,4 +1,4 @@
-package org.badgrades.wordswithsalt.backend.actor
+package org.badgrades.wordswithsalt.backend.actor.word
 
 import akka.actor.{Actor, ActorLogging, Props, Terminated}
 import akka.routing.{ActorRefRoutee, RoundRobinRoutingLogic, Router}
