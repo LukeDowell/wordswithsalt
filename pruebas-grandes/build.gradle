@@ -2,5 +2,18 @@ apply plugin: 'scala'
 
 dependencies {
     compile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
-//    compile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
+    compile group: 'io.gatling', name: 'gatling-core', version: gatlingVersion
+    compile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: gatlingVersion
+}
+
+task loadTest(type: JavaExec) {
+    description = "load test with Gatling"
+    group = "gatling"
+    classpath = sourceSets.main.runtimeClasspath
+    main = "io.gatling.app.Gatling"
+    args = [
+            "--simulation", "org.badgrades.wordswithsalt.pruebasgrandes.simulation.DefaultLoadSimulation",
+            "--results-folder", "${buildDir}/gatling-results",
+            "--binaries-folder", sourceSets.main.output.classesDir.toString(),
+    ]
 }

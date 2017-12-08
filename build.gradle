@@ -7,7 +7,7 @@ ext {
     scalaMajorVersion = '2.12'
     scalaLoggingVersion = '3.7.2'
     scalaTestVersion = '3.0.4'
-    gatlingVersion = '2.2.2'
+    gatlingVersion = '2.3.0'
     mockitoVersion = '1.10.19'
     firebaseVersion = '5.5.0'
     slf4jVersion = '1.7.25'
