@@ -1,7 +1,6 @@
 package org.badgrades.wordswithsalt.backend.util
 
 import com.google.api.core._
-import com.google.firebase.database.{DataSnapshot, DatabaseError, ValueEventListener}
 
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.language.implicitConversions

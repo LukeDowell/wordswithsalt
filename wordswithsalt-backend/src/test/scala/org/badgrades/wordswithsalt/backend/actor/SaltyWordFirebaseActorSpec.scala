@@ -3,15 +3,16 @@ package org.badgrades.wordswithsalt.backend.actor
 import akka.actor.ActorRef
 import com.google.firebase.database.{DataSnapshot, DatabaseReference, FirebaseDatabase}
 import org.badgrades.wordswithsalt.backend.ActorTestSuite
-import org.badgrades.wordswithsalt.backend.actor.SaltyWordDataActor.{FoundWord, GetRandomWord}
+import org.badgrades.wordswithsalt.backend.actor.word.SaltyWordDataActor.{FoundWord, GetRandomWord}
+import org.badgrades.wordswithsalt.backend.actor.word.SaltyWordFirebaseActor
 import org.badgrades.wordswithsalt.backend.domain.SaltyWord
 import org.mockito.Matchers._
-import org.mockito.{Mock, Mockito}
+import org.mockito.Mockito
 import org.mockito.Mockito._
 import org.scalatest.WordSpecLike
 
-import scala.concurrent.duration._
 import scala.collection.JavaConverters._
+import scala.concurrent.duration._
 import scala.language.postfixOps
 import scala.reflect.ClassTag
 
