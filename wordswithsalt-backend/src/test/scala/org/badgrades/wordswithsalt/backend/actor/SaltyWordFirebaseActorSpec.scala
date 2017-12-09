@@ -3,7 +3,7 @@ package org.badgrades.wordswithsalt.backend.actor
 import akka.actor.ActorRef
 import com.google.firebase.database.{DataSnapshot, DatabaseReference, FirebaseDatabase}
 import org.badgrades.wordswithsalt.backend.ActorTestSuite
-import org.badgrades.wordswithsalt.backend.actor.word.SaltyWordDataActor.{FoundWord, GetRandomWord}
+import org.badgrades.wordswithsalt.backend.actor.word.SaltyWordActor.{FoundWord, GetRandomWord}
 import org.badgrades.wordswithsalt.backend.actor.word.SaltyWordFirebaseActor
 import org.badgrades.wordswithsalt.backend.domain.SaltyWord
 import org.mockito.Matchers._

@@ -10,8 +10,13 @@ import scala.collection.JavaConverters._
 import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Random, Success}
 
+/**
+  * Flushing this down the toilet. Firebase is neat but Cassandra is for the cool kids. Also it's crazy
+  * how non-performant my implementation of this is. :(
+  */
+@Deprecated
 class SaltyWordFirebaseActor(val db: FirebaseDatabase) extends Actor with ActorLogging {
-  import SaltyWordDataActor._
+  import SaltyWordActor._
   import SaltyWordFirebaseActor._
 
   implicit val ec: ExecutionContext = context.dispatcher
@@ -21,7 +26,7 @@ class SaltyWordFirebaseActor(val db: FirebaseDatabase) extends Actor with ActorL
     case WriteWord(phrase, description) =>
       log.info(s"Attempting to write word with phrase=$phrase, description=$description")
       val ref = dbWordRef.push()
-      val saltyWord = SaltyWord(ref.getKey, phrase, description)
+      val saltyWord = SaltyWord(ref.getKey, phrase, description).toBean
       ref.setValueAsync(saltyWord) onComplete {
         case Success(_) => log.info(s"$saltyWord successfully written to DB!")
         case Failure(err) => log.error(s"Error while writing $saltyWord to DB.", err)

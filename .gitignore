@@ -177,5 +177,6 @@ fabric.properties
 
 # Other
 wordswithsalt-backend/src/main/resources/firebase-credentials.json
+wordswithsalt-backend/build
 pruebas-grandes/build
 

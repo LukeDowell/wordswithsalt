@@ -4,16 +4,21 @@ import akka.actor.{Actor, ActorLogging, Props, Terminated}
 import akka.routing.{ActorRefRoutee, RoundRobinRoutingLogic, Router}
 import org.badgrades.wordswithsalt.backend.domain.SaltyWord
 
-class SaltyWordDataActor extends Actor with ActorLogging {
-  import SaltyWordDataActor._
+class SaltyWordActor extends Actor with ActorLogging {
+  import SaltyWordActor._
 
-  var router: Router = {
-    val routees = Vector.fill(NumRoutees) {
-      val r = context.actorOf(SaltyWordFirebaseActor.props())
-      context watch r
-      ActorRefRoutee(r)
+  var router: Router = _
+
+  override def preStart(): Unit = {
+    log.info(s"SaltyWordDataActor starting...")
+    router = {
+      val routees = Vector.fill(NumRoutees) {
+        val r = createPersistenceActor
+        context watch r
+        ActorRefRoutee(r)
+      }
+      Router(RoundRobinRoutingLogic(), routees)
     }
-    Router(RoundRobinRoutingLogic(), routees)
   }
 
   override def receive: Receive = {
@@ -23,18 +28,19 @@ class SaltyWordDataActor extends Actor with ActorLogging {
     case Terminated(a) =>
       log.warning(s"Actor=${a.path} terminated, replacing...")
       router = router.removeRoutee(a)
-      val r = context.actorOf(SaltyWordFirebaseActor.props())
+      val r = createPersistenceActor
       context watch r
       router = router.addRoutee(r)
   }
 
-  override def preStart(): Unit = log.info(s"SaltyWordDataActor spinning up with $NumRoutees routees")
+  private[word] def createPersistenceActor = context.actorOf(SaltyWordFirebaseActor.props().withDispatcher(FirebaseDispatcherId))
 }
 
-object SaltyWordDataActor {
-  def props: Props = Props[SaltyWordDataActor]
+object SaltyWordActor {
+  def props: Props = Props[SaltyWordActor]
   val Name: String = "salty-word-data-actor"
-  val NumRoutees: Int = 5
+  val FirebaseDispatcherId: String = "firebase-dispatcher"
+  val NumRoutees: Int = 10
 
   sealed trait SaltyWordDataMessage
   case class GetWordById(id: String) extends SaltyWordDataMessage

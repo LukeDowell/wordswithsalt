@@ -16,6 +16,6 @@ class DefaultLoadSimulation extends Simulation {
     .acceptLanguageHeader("en-US,en;q=0.5")
 
   setUp(
-    DefaultLoadTest.apply.inject(rampUsers(20) over (10 seconds))
+    DefaultLoadTest.apply.inject(rampUsers(500) over (30 seconds))
   ).protocols(httpConf)
 }

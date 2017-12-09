@@ -4,6 +4,8 @@ apply plugin: 'application'
 mainClassName = 'org.badgrades.wordswithsalt.backend.Application'
 
 dependencies {
+    // https://mvnrepository.com/artifact/org.jsoup/jsoup
+    compile group: 'org.jsoup', name: 'jsoup', version: jsoupVersion
     compile group: 'com.google.firebase', name: 'firebase-admin', version: firebaseVersion
     compile group: 'org.slf4j', name: 'slf4j-simple', version: slf4jVersion
     compile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
