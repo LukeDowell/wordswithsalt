@@ -5,6 +5,7 @@ import java.time.LocalDateTime
 import akka.actor.{Actor, ActorLogging, ActorRef, Props, Terminated, Timers}
 import akka.pattern.pipe
 import org.badgrades.wordswithsalt.backend.actor.weather.WeatherDataPersistenceActor.WriteWeatherData
+import org.badgrades.wordswithsalt.backend.domain.WeatherData
 import org.badgrades.wordswithsalt.backend.service.DocService
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -23,7 +24,7 @@ class WeatherDataScrapingActor extends Actor with ActorLogging with Timers {
     log.info(s"Starting weather scraper")
     persistenceActor = createPersistenceActor
     context watch persistenceActor
-    timers.startPeriodicTimer(ScrapeKey, StartScrape, 30 seconds)
+    timers.startPeriodicTimer(ScrapeKey, StartScrape, 10 seconds)
   }
 
   override def receive: Receive = {
@@ -33,7 +34,9 @@ class WeatherDataScrapingActor extends Actor with ActorLogging with Timers {
 
     case doc: Document =>
       log.info(s"Received document with title ${doc.title()}")
-      persistenceActor ! WriteWeatherData(DocService.parse(doc))
+      val parsedWeatherData: WeatherData = DocService.parse(doc)
+      log.info(s"Parsed $parsedWeatherData from document with title ${doc.title()}")
+      persistenceActor ! WriteWeatherData(parsedWeatherData)
 
     case Terminated(a) =>
       log.warning(s"$PersistenceActorName died, replacing...")
@@ -41,7 +44,7 @@ class WeatherDataScrapingActor extends Actor with ActorLogging with Timers {
       context watch persistenceActor
   }
 
-  private[weather] def createPersistenceActor = context.actorOf(WeatherDataPersistenceActor.props, PersistenceActorName)
+  private[weather] def createPersistenceActor: ActorRef = context.actorOf(WeatherDataPersistenceActor.props, PersistenceActorName)
 }
 
 object WeatherDataScrapingActor {

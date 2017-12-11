@@ -19,7 +19,8 @@ class WeatherDataActor extends Actor with ActorLogging {
       context watch weatherScraperActor
   }
 
-  private[weather] def createWeatherScraperActor = context.actorOf(WeatherDataScrapingActor.props.withDispatcher(WeatherDispatcherId), WeatherScraperActorName)
+  private[weather] def createWeatherScraperActor: ActorRef =
+    context.actorOf(WeatherDataScrapingActor.props.withDispatcher(WeatherDispatcherId), WeatherScraperActorName)
 }
 
 object WeatherDataActor {

@@ -40,7 +40,7 @@ object SaltyWordActor {
   def props: Props = Props[SaltyWordActor]
   val Name: String = "salty-word-data-actor"
   val FirebaseDispatcherId: String = "firebase-dispatcher"
-  val NumRoutees: Int = 10
+  val NumRoutees: Int = 5
 
   sealed trait SaltyWordDataMessage
   case class GetWordById(id: String) extends SaltyWordDataMessage
