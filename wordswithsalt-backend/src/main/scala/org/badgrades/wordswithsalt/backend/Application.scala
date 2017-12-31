@@ -6,13 +6,14 @@ import akka.stream.ActorMaterializer
 import com.typesafe.scalalogging.StrictLogging
 import org.badgrades.wordswithsalt.backend.actor.weather.WeatherDataScrapingActor
 import org.badgrades.wordswithsalt.backend.actor.word.SaltyWordActor
+import org.badgrades.wordswithsalt.backend.config.Constants
 import org.badgrades.wordswithsalt.backend.web.WordsWithSaltRoutes
 
 import scala.concurrent.ExecutionContext
 
 object Application extends WordsWithSaltRoutes with StrictLogging {
   implicit val actorSystem: ActorSystem = ActorSystem("wordsWithSaltSystem")
-  implicit val ec: ExecutionContext = actorSystem.dispatchers.lookup("routes-dispatcher")
+  implicit val ec: ExecutionContext = actorSystem.dispatchers.lookup(Constants.RoutesDispatcher)
   implicit val actorMaterializer: ActorMaterializer = ActorMaterializer()
   implicit val saltyWordDataActor: ActorRef = actorSystem.actorOf(SaltyWordActor.props, SaltyWordActor.Name)
 
@@ -24,6 +25,9 @@ object Application extends WordsWithSaltRoutes with StrictLogging {
     bindingFuture.failed.foreach { ex => logger.error(ex.getMessage) }
 
     // Initialize and schedule the weather scraping system
-    actorSystem.actorOf(WeatherDataScrapingActor.props.withDispatcher("weather-dispatcher"), "weather-scraper")
+    actorSystem.actorOf(
+      WeatherDataScrapingActor.props.withDispatcher(Constants.WeatherDispatcher),
+      WeatherDataScrapingActor.Name
+    )
   }
 }

@@ -5,13 +5,14 @@ import java.time.LocalDateTime
 import akka.actor.{Actor, ActorLogging, ActorRef, Props, Terminated, Timers}
 import akka.pattern.pipe
 import org.badgrades.wordswithsalt.backend.actor.weather.WeatherDataPersistenceActor.WriteWeatherData
-import org.badgrades.wordswithsalt.backend.domain.WeatherData
+import org.badgrades.wordswithsalt.backend.config.Constants
+import org.badgrades.wordswithsalt.backend.domain.RawWeatherData
 import org.badgrades.wordswithsalt.backend.service.DocService
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
-import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration._
+import scala.concurrent.{ExecutionContext, Future}
 import scala.language.postfixOps
 
 class WeatherDataScrapingActor extends Actor with ActorLogging with Timers {
@@ -30,11 +31,11 @@ class WeatherDataScrapingActor extends Actor with ActorLogging with Timers {
   override def receive: Receive = {
     case StartScrape =>
       log.info(s"Starting weather scraping task at ${LocalDateTime.now()}")
-      Future { Jsoup.connect(WeatherDataUrl).get() } pipeTo self
+      Future { Jsoup.connect(Constants.WeatherDataUrl).get() } pipeTo self
 
     case doc: Document =>
       log.info(s"Received document with title ${doc.title()}")
-      val parsedWeatherData: WeatherData = DocService.parse(doc)
+      val parsedWeatherData: RawWeatherData = DocService.parse(doc)
       log.info(s"Parsed $parsedWeatherData from document with title ${doc.title()}")
       persistenceActor ! WriteWeatherData(parsedWeatherData)
 
@@ -48,9 +49,9 @@ class WeatherDataScrapingActor extends Actor with ActorLogging with Timers {
 }
 
 object WeatherDataScrapingActor {
+  val Name = "weather-data-scraping-actor"
   def props: Props = Props[WeatherDataScrapingActor]
-  val WeatherDataUrl = "https://www.glerl.noaa.gov/metdata/chi/"
   val PersistenceActorName = "weather-data-persistence-actor"
-  case object ScrapeKey
+  private case object ScrapeKey
   case object StartScrape
 }

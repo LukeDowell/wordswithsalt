@@ -2,7 +2,7 @@ package org.badgrades.wordswithsalt.backend.actor.word
 
 import akka.actor.{Actor, ActorLogging, Props}
 import com.google.firebase.database._
-import org.badgrades.wordswithsalt.backend.FirebaseConfig
+import org.badgrades.wordswithsalt.backend.config.FirebaseConfig
 import org.badgrades.wordswithsalt.backend.persistence.SaltyWordRepo
 import org.badgrades.wordswithsalt.backend.persistence.impl.SaltyWordFirebaseImpl
 

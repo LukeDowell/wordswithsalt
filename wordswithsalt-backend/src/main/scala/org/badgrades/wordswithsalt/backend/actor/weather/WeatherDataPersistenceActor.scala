@@ -1,7 +1,7 @@
 package org.badgrades.wordswithsalt.backend.actor.weather
 
 import akka.actor.{Actor, ActorLogging, Props}
-import org.badgrades.wordswithsalt.backend.domain.WeatherData
+import org.badgrades.wordswithsalt.backend.domain.RawWeatherData
 
 class WeatherDataPersistenceActor extends Actor with ActorLogging {
   import WeatherDataPersistenceActor._
@@ -14,5 +14,5 @@ class WeatherDataPersistenceActor extends Actor with ActorLogging {
 
 object WeatherDataPersistenceActor {
   def props: Props = Props[WeatherDataPersistenceActor]
-  case class WriteWeatherData(weatherData: WeatherData)
+  case class WriteWeatherData(rawWeatherData: RawWeatherData)
 }

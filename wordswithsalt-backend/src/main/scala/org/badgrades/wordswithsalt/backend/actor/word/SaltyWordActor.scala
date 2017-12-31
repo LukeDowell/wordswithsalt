@@ -2,6 +2,7 @@ package org.badgrades.wordswithsalt.backend.actor.word
 
 import akka.actor.{Actor, ActorLogging, Props, Terminated}
 import akka.routing.{ActorRefRoutee, RoundRobinRoutingLogic, Router}
+import org.badgrades.wordswithsalt.backend.config.Constants
 import org.badgrades.wordswithsalt.backend.domain.SaltyWord
 
 class SaltyWordActor extends Actor with ActorLogging {
@@ -33,13 +34,12 @@ class SaltyWordActor extends Actor with ActorLogging {
       router = router.addRoutee(r)
   }
 
-  private[word] def createPersistenceActor = context.actorOf(SaltyWordFirebaseActor.props().withDispatcher(FirebaseDispatcherId))
+  private[word] def createPersistenceActor = context.actorOf(SaltyWordFirebaseActor.props().withDispatcher(Constants.FirebaseDispatcher))
 }
 
 object SaltyWordActor {
   def props: Props = Props[SaltyWordActor]
   val Name: String = "salty-word-data-actor"
-  val FirebaseDispatcherId: String = "firebase-dispatcher"
   val NumRoutees: Int = 5
 
   sealed trait SaltyWordDataMessage

@@ -14,7 +14,7 @@ import java.time.Instant
   * @param relativeHumidity
   */
 case class RawWeatherData(
-                           timestamp: Instant,
+                           timestamp: Instant = Instant.now(),
                            windSpeed: String,
                            maxWindSpeed: String,
                            windDirectionInDegrees: String,
@@ -22,8 +22,4 @@ case class RawWeatherData(
                            windChill: String,
                            dewPoint: String,
                            relativeHumidity: String
-                      )
-
-case class WeatherData(
-                        timestamp: Instant
-                      )
+                         )

@@ -2,12 +2,26 @@ package org.badgrades.wordswithsalt.backend.service
 
 import java.time.Instant
 
-import org.badgrades.wordswithsalt.backend.domain.WeatherData
-import org.jsoup.nodes.Document
+import org.badgrades.wordswithsalt.backend.domain.RawWeatherData
+import org.jsoup.nodes.{Document, Element}
 
 object DocService {
 
-  def parse(document: Document): WeatherData = {
-    WeatherData(Instant.now())
+  val DataTableSelector = "table.centeredTable"
+
+  def parse(document: Document): RawWeatherData = {
+    val tableBody: Element = document.selectFirst(DataTableSelector + "> tbody")
+    tableBody.children().forEach(tableRow => println(tableRow))
+
+    RawWeatherData(
+      timestamp = Instant.now(),
+      windSpeed = "",
+      maxWindSpeed = "",
+      windDirectionInDegrees = "",
+      airTemperature = "",
+      windChill = "",
+      dewPoint = "",
+      relativeHumidity = ""
+    )
   }
 }

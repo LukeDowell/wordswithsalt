@@ -1,10 +1,10 @@
 package org.badgrades.wordswithsalt.backend.persistence.impl
 
+import com.google.api.core.{ApiFuture, ApiFutureCallback, ApiFutures}
 import com.google.firebase.database._
 import com.typesafe.scalalogging.LazyLogging
 import org.badgrades.wordswithsalt.backend.domain.{SaltyWord, SaltyWordBean}
 import org.badgrades.wordswithsalt.backend.persistence.SaltyWordRepo
-import org.badgrades.wordswithsalt.backend.util.FirebaseExtensions._
 
 import scala.collection.JavaConverters._
 import scala.concurrent.{ExecutionContext, Future, Promise}
@@ -17,12 +17,11 @@ import scala.util.Random
 class SaltyWordFirebaseImpl(db: FirebaseDatabase) extends SaltyWordRepo with LazyLogging {
   import SaltyWordFirebaseImpl._
 
-  implicit val ec: ExecutionContext = _
   def dbWordRef: DatabaseReference = db.getReference(FirebaseReferencePath)
 
-  override def writeWord(phrase: String, description: String): Future[SaltyWord] = {
+  override def writeWord(phrase: String, description: String)(implicit ec: ExecutionContext): Future[SaltyWord] = {
     val ref = dbWordRef.push()
-    val saltyWord = SaltyWord(ref.getKey, saltyWord, description)
+    val saltyWord = SaltyWord(ref.getKey, phrase, description)
     logger.info(s"Attempting to write $saltyWord to Firebase")
     ref.setValueAsync(saltyWord.toBean) flatMap { _ =>
       logger.info(s"Successfully wrote $saltyWord to Firebase")
@@ -30,7 +29,7 @@ class SaltyWordFirebaseImpl(db: FirebaseDatabase) extends SaltyWordRepo with Laz
     }
   }
 
-  override def getRandomWord: Future[SaltyWord] = {
+  override def getRandomWord(implicit ec: ExecutionContext): Future[SaltyWord] = {
     val p = Promise[SaltyWord]()
     dbWordRef.addValueEventListener(new ValueEventListener {
       def onCancelled(error: DatabaseError): Unit = onCancelledHandler(p, error)
@@ -53,7 +52,7 @@ class SaltyWordFirebaseImpl(db: FirebaseDatabase) extends SaltyWordRepo with Laz
     p.future
   }
 
-  override def getWordById(id: String): Future[SaltyWord] = {
+  override def getWordById(id: String)(implicit ec: ExecutionContext): Future[SaltyWord] = {
     val p = Promise[SaltyWord]()
     dbWordRef.addValueEventListener(new ValueEventListener {
       def onCancelled(error: DatabaseError): Unit = onCancelledHandler(p, error)
@@ -67,7 +66,7 @@ class SaltyWordFirebaseImpl(db: FirebaseDatabase) extends SaltyWordRepo with Laz
     p.future
   }
 
-  override def getAllWords: Future[Seq[SaltyWord]] = {
+  override def getAllWords(implicit ec: ExecutionContext): Future[Seq[SaltyWord]] = {
     val p = Promise[Seq[SaltyWord]]
     dbWordRef.addValueEventListener(new ValueEventListener {
       def onCancelled(error: DatabaseError): Unit = onCancelledHandler(p, error)
@@ -88,6 +87,7 @@ class SaltyWordFirebaseImpl(db: FirebaseDatabase) extends SaltyWordRepo with Laz
     p.future
   }
 
+
   private[persistence] def onCancelledHandler[T](p: Promise[T], error: DatabaseError): Unit = {
     logger.error(s"Error reading from Firebase. Code=${error.getCode}, Message=${error.getMessage}, Details=${error.getDetails}")
     p.failure(new Exception(error.getMessage))
@@ -96,4 +96,16 @@ class SaltyWordFirebaseImpl(db: FirebaseDatabase) extends SaltyWordRepo with Laz
 
 object SaltyWordFirebaseImpl {
   val FirebaseReferencePath = "/words"
+
+  implicit def firebaseFutureToScalaFuture[T](apiFuture: ApiFuture[T])(implicit ec: ExecutionContext): Future[T] = {
+    val promise = Promise[T]()
+    ApiFutures.addCallback(
+      apiFuture,
+      new ApiFutureCallback[T] {
+        override def onFailure(t: Throwable): Unit = promise.failure(t)
+        override def onSuccess(result: T): Unit = promise.success(result)
+      }
+    )
+    promise.future
+  }
 }

@@ -1,4 +1,4 @@
-package org.badgrades.wordswithsalt.backend
+package org.badgrades.wordswithsalt.backend.config
 
 import java.io.InputStream
 

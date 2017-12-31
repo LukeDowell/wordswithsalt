@@ -1,0 +1,919 @@
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Fonts
+   ========================================================================== */
+/*Template below*/
+/*
+@font-face {
+	font-family: 'AlegreyaSans';
+	src: url('../fonts/AlegreyaSans-Regular.eot');
+	src: url('../fonts/AlegreyaSans-Regular.woff') format('woff'), 
+	     url('../fonts/AlegreyaSans-Regular.ttf') format('truetype'), 
+             url('../fonts/AlegreyaSans-Regular.svg') format('svg');
+}
+*/
+
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+html {
+    font-size: 1.0em;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.4;
+    background-color: #012a52;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+
+audio,
+canvas,
+img,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+	display: inline;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+table, td, tr, th{
+    padding: 5px;    
+}
+/* ==========================================================================
+   Browse Happy prompt
+   ========================================================================== */
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+/* Some standard tricks */
+
+/* NEED MODERNIZR FOR CAPTION THINGS */
+
+a{
+    color: #00376f;
+}
+
+.captionedImageRight, .captionedImageLeft{
+    margin: 15px;
+    font-size: 0.8em;
+    display: table;
+}
+
+.subMenuRight, .subMenuLeft{
+    margin: 15px;
+    padding: 10px;
+    font-size: 0.9em;
+    display: table;
+    background-color: #DEEEFF;
+    width: 250px;
+    text-align: center;
+    line-height: 1.75em;
+}
+
+.captionedImageLeft, .subMenuLeft{
+    float: left;
+}
+
+.captionedImageRight, .subMenuRight{
+    float: right;
+}
+
+.centeredContent{
+    position: relative;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.centeredTable{
+    margin: 0px auto;
+}
+
+.subMenuHead{
+    /**Fill with whatever**/
+}
+
+.subMenuRule{
+    width: 100%;
+    height: 0px;
+    border-bottom: 1px solid #AAAAAA;
+}
+
+.captionJustLeft{
+    text-align: left;
+    caption-side: bottom;
+}
+
+.captionJustCenter{
+    text-align: center;
+    caption-side: bottom;
+}
+
+.bottomCaption{
+    display: table-caption;
+    caption-side: bottom;
+}
+
+.logoLink, .headerNavBarLink{
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Old White Color: E4EFF2 */
+/* Blue Color: 0e9dd6 */
+
+.linkInADarkSpot{
+    text-decoration: none;
+    color: #E4EFF2;
+}
+
+.footerContacts{
+    text-decoration: none;
+    color: #E4EFF2;
+}
+
+.linkInADarkSpot:hover, .footerContacts:hover{
+    text-decoration: underline;
+}
+
+.linkInADarkSpot:visited{
+    text-decoration: none;
+    color: #E4EFF2;
+}
+
+.footerContacts:visited{
+    text-decoration: none;
+    color: #E4EFF2;
+}
+
+.additionalResourceBottom{
+    background-color: #C2DCFF;
+    padding: 20px;
+}
+
+.comHead
+{
+        color: #0000FF;
+}
+
+.comHead:hover
+{
+        color: #00AAFF;
+        border-bottom: 1px dotted #00FFFF;
+        cursor: pointer;
+}
+
+.comSec , .arLinks
+{
+        display: none;
+}
+
+/* THIS is to ensure proper fitting on mobile devices
+ * Best not to define 100% width... */
+.primaryWrapper{
+    min-width: 960px;
+}
+
+/* End Standard Tricks */
+
+#mainContent{
+    position: relative;
+    margin: 0px 0px 0px 0px;
+    background-color: #012a52;
+    width: 100%;
+}
+
+#mainContentInner{
+    position: relative;
+    width: 950px;
+    margin: 0px auto;
+    padding: 20px;
+    background-color: #FFFFFF;
+}
+
+
+#noaaBanner{
+    position: relative;
+    background-color: #A3E3FF;
+    min-width: 960px;
+    height: 40px;
+    text-align: center;
+    border-bottom: 1px solid #012a52;
+}
+
+#noaaWords{
+    float: right;
+    font-size: 12px;
+    font-family: "Arial", serif;
+}
+
+#docWords{
+    font-size: 9px;
+}
+
+/*#noaaLogoContainer{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 520px;
+    font-size: 12px;
+    font-family: "Arial", serif !important;
+    color: #FFFFFF;
+    text-align: center;
+}*/
+
+#noaaLogoContainer{
+    position: relative;
+    width: 520px;
+    font-size: 12px;
+    font-family: "Arial", serif !important;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+#noaaLogoOnlyContainer{
+    position: absolute;
+    top: 13px;
+    left: 5px;
+    /*width: 360px;*/
+}
+
+#docLogo, #noaaLogoFoot{
+    /*float: left;*/
+    padding: 10px;
+}
+
+#docLogo{
+	position: absolute;
+	top: 5px;
+	left: 5px;
+}
+
+#noaaLogoFoot{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+/*#oarLink{
+	position: absolute;
+	left: 150px;
+	top: 25px;
+}*/
+
+#noaaDocWords{
+    padding: 10px 0px 0px 20px;
+}
+
+#glerlBannerNav{
+    position: relative;
+    background-color: #012a52;
+    /*background-image: url('cssElements/glerlBannerGrad.png');
+    background-repeat: repeat;*/
+    width: 100%;
+    height: 160px;
+    text-align: center;
+    /*border-bottom: 1px solid #3BC7FF;*/
+}
+
+#glerlBannerInnerNav{
+    position: relative;
+    margin: 0px auto;
+    background-color: transparent;
+    background-image: url('cssElements/glerlBannerInnerGrad.png');
+    background-repeat: no-repeat;
+    width: 950px;
+    height: 120px;
+    padding: 20px;
+}
+
+#glerlLogoContainer{
+    position: absolute;
+    top: 10px;
+    left: 70px;
+}
+
+#glerlLogo{
+	height: 70px;
+}
+
+#glerlDef{
+    position: absolute;
+    top: 80px;
+    left: 10px;
+    color: #C7EFFF;
+    font-size: 24px;
+}
+
+#headerNavBar{
+    position: absolute;
+    /*background-color: #012A52;*/
+    background-color: transparent;
+    border-top: 1px dotted #3495BA; 
+    color: #FFFFFF;
+    /*background-image: url('cssElements/headerNavBar.png');
+    background-repeat: no-repeat;*/
+    bottom: 0px;
+    width: 950px;
+    height: 32px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 0.6em;
+}
+
+.headerNavButton{
+    position: relative;
+    display: inline-block;
+    width: auto;
+    height: 26px;
+    background-color: transparent;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 3px -2px 3px; 
+    padding: 0px 20px 0px;
+}
+
+.headerNavButton:hover{
+    background-image: url('cssElements/headerNavButtonBackHover.png');
+    background-repeat: repeat;
+    border: 1px solid #9EE4FF;
+    margin: 2px -3px 2px; 
+}
+
+.headerNavSubMenuItem:hover{
+    /*background-image: url('cssElements/headerNavButtonBackHover.png');*/
+    /*background-repeat: repeat;*/
+    border-bottom: 1px solid #9EE4FF;
+    margin: 2px 0px 2px; 
+}
+
+.headerNavSubMenu{
+    display: none;
+    min-width: 250px;
+    width: auto;
+    height: auto;
+    border: 1px solid #9EE4FF;
+    background-color: #012a52;
+    color: #FFFFFF;
+    position: absolute;
+    top: 29px;
+    text-align: left; /*UNCOMMENT TO TEST LEFT ALIGN SUBMENUS*/
+    z-index: 2000;
+}
+
+.headerNavSubMenuItem{
+    position: relative;
+    width: 250px;
+    height: 26px;    
+    background-color: transparent;
+    text-align: left;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 3px 0px 3px; 
+    padding: 0px 20px 0px;   
+}
+
+#socialMediaBar{
+    text-align: center;
+    position: absolute;
+    right: 10px;
+    top: 75px;
+}
+
+.socialMediaButton{
+    position: relative;
+    display: inline-block;
+    width: auto;
+    height: 30px;
+    background-color: transparent;
+    padding: 5px;
+}
+
+#glerlSearchBar{
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    color: #C7EFFF;
+    width: 300px;
+    text-align: right; 
+    font-size: 13px;
+    font-family: 'Arial', sans-serif;
+}
+
+#glerlSearchField{
+    width: 90%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #00AADD;
+    color: #FFFFFF;
+}
+
+.glerlSearchButton{
+    padding: 3px;
+    margin: 1px -1px;
+}
+
+#partnersRow{
+    background-color: #E4E4E4;
+    height: 100px;
+    position: relative;
+    margin: -20px 0px 0px 0px;
+    border-top: 1px solid #CCCCCC;
+}
+
+#partnersRowInner{
+    background-color: transparent;
+    width: 950px;
+    position: relative;
+    margin: 0px auto;
+}
+
+.partnerIcon{
+    position: relative;
+    display: inline-block;
+    width: auto;
+    background-color: transparent;
+    padding: 5px 10px;
+}
+
+
+#mainFooter{
+    position: relative;
+    color: #EEEEEE;
+    margin: 0px 0px 0px 0px;
+    background-color: #012a52;
+    width: 100%;
+}
+
+#mainFooterInner{
+    position: relative;
+    margin: 0px auto; 
+    padding: 10px 20px;
+    background-color: #222222;
+    color: #BBBBBB;
+    width: 950px;   
+    height: 70px;
+}
+
+#mvSection{
+    float: left;
+    width: 700px;
+}
+
+#contactus{
+    float: right;
+    width: 200px;
+	color: #C7EFFF;
+}
+
+#mainFooterNav{
+	padding: 10px 0px;
+    width: 100%;
+}
+
+#mainFooterGeneralNav{
+    display: inline-block;
+    float: left;
+    width: 50%;
+    min-width: 300px;
+}
+
+#glerlTwitter{
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 305px;
+    height: 445px;
+}
+
+.resProgTextFront{
+    vertical-align: top;
+    padding: 5px;
+}
+
+.quickLinksIcons{
+    width: 125px;
+    height: 125px;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#quickLinksGrid{
+    margin: 0px auto;
+}
+
+#frontIntro{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 595px;
+    border-right: none;
+    padding: 5px;
+	/*font-size: 0.9em;*/
+}
+
+#frontIntroDivider{
+	width: 1px;
+	height: 400px;
+	position: absolute;
+	top: 25px;
+	right: 340px;
+	border-right: 1px solid #8ABFD4;
+}
+
+#frontContent{
+    position: relative;
+    width: 100%;
+    height: 450px;
+}
+
+#frontTopContent{
+    position: relative;
+    width: 100%;
+}
+
+
+/*
+THEME PAGE RELATED STUFF
+*/
+
+.dGraph
+{
+	position:relative;
+	margin: 3px auto 3px auto;
+	color: #000000;
+	background-color: #FFFFFF;
+	font-family: "Verdana", sans-serif;
+	font-size: 10px;
+	width: auto;
+	height: auto;
+	background-image: url('cssElements/chartLogoBack.jpg');
+	background-repeat: no-repeat;
+	background-position: 60px 0px;
+}
+
+#lakeGaugeTable
+{
+        border: 1px solid #5c85be;
+        border-collapse: collapse;
+}
+
+#tHead
+{
+        background-color: #DEEBFC;
+}
+
+#tr1
+{
+        background-color: #a1bee6;
+}
+
+#tr2
+{
+        background-color: #C2DCFF;
+}
+
+#dTip
+{
+        display: none;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 150px;
+        width: 300px;
+        z-index: 99;
+        color: #000000;
+        background-color: #FFFFFF;
+        border: 1px solid #00AAFF;
+        text-align: left;
+        padding: 5px;
+
+}
+
+
+.panelLink
+{
+	color: #00376f !important;
+	text-decoration: underline;
+}
+
+#gaugeMap
+{
+	display: inline;
+	width: 610px;
+	height: 440px;
+}
+
+#monLogos
+{
+	position: relative;
+	margin: 0 auto;
+	height: 100px;
+	width: 300px;
+}
+
+#tcLogo
+{
+	position: absolute;
+	left: 5px;
+}
+
+#chsLogo
+{
+	position: absolute;
+	right: 5px;
+}
+
+#csvDataDetail
+{
+	text-decoration: underline;
+	color: #0000FF;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#csvDataDetails
+{
+	display: none;
+}
+
+.dLink, .hLink
+{
+	font-weight: bold;
+	color: #0000FF;
+}
+
+.dLink:hover, .hLink:hover
+{
+	color: #00AAFF;
+	border-bottom: 1px dotted #00FFFF;
+	cursor: pointer;
+}
+
+
+
+
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Image replacement
+ */
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-o-min-device-pixel-ratio: 5/4),
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    /*a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }*/
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

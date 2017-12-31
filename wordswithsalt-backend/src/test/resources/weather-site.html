@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://www.glerl.noaa.gov/metdata/chi/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Chicago, IL Meteorological Data &amp; WebCam</title>
+        <meta name="description" content="Information from NOAA-GLERL">
+        <meta name="viewport" content="width=device-width, user-scalable=1">
+
+        <!-- REQUIRED METADATA -->
+
+        <!-- NOAA Great Lakes Environmental Research Laboratory   -->
+        <!-- 4840 S. State Rd.                             -->
+        <!-- Ann Arbor, MI 48108-9719                             -->
+        <!-- 734-741-2235                                         -->
+        <!-- contact: www.glerl@noaa.gov                          -->
+        <!-- ==================================================== -->
+        <!--GLERL scientists approach research from a multidisciplinary,
+        collaborative perspective. Our vision is to build on our knowledge
+        and expertise to establish an ecological forecasting capability for the
+        Great Lakes. This effort involves predicting the effects of biological,
+        chemical, physical, and human-induced changes on ecosystems and their
+        components. GLERL research is organized into four integrated research
+        programs: Ecological Prediction, Aquatic Invasive Species, Physical
+        Environment Prediction, and Environmental Observing Systems. -->
+
+        <meta name="dc.title" content="">
+        <meta name="dc.description" content="">
+        <meta name="dc.date.created" content="">
+        <meta name="dc.date.reviewed" content="">
+        <meta name="dc.creator" content="US Department of Commerce, NOAA,
+              Great Lakes Environmental Research Laboratory, Cooperative
+              Institute for Limnology and Ecosystems Research">
+        <meta name="dc.language" scheme="DCTERMS.RFC1766" content="EN-US">
+
+        <!-- END REQUIRED METADATA -->
+
+        <!-- BEGIN BASE LIBRARIES -->
+
+        <!-- Will want to replace / with root after transitioning -->
+        <link rel="shortcut icon" href="https://www.glerl.noaa.gov/images/favicon.ico">
+        <link rel="stylesheet" href="./weather-site_files/normalize.css">
+        <link rel="stylesheet" href="./weather-site_files/main.css">
+        <script type="text/javascript" async="" defer="" src="./weather-site_files/piwik.js"></script><script src="./weather-site_files/jquery.min.js"></script><style></style>
+        <!--<script src="/js/jquery-mobile/jquery.mobile.min.js"></script>
+        <script src="/js/jquery-mobile-datebox/jqm-datebox.core.min.js">
+        </script>-->
+        <link rel="stylesheet" href="./weather-site_files/jquery-ui.css">
+        <link rel="stylesheet" href="./weather-site_files/jquery-ui.structure.css">
+        <link rel="stylesheet" href="./weather-site_files/jquery-ui.theme.css">
+        <script src="./weather-site_files/jquery-ui.js"></script>
+
+        <script type="text/javascript" src="./weather-site_files/dygraph-combined.js"></script>
+
+        <script src="./weather-site_files/plugins.js"></script>
+        <script src="./weather-site_files/main.js"></script>
+
+        <!-- END BASE LIBRARIES -->
+
+        <!-- BEGIN ADDITIONAL PAGE SPECIFIC LIBRARIES -->
+
+        <!-- END ADDITIONAL PAGE SPECIFIC LIBRARIES -->
+
+        <!-- BEGIN ANALYTICS -->
+
+        <!-- FOR NOAA -->
+        <script language="javascript" id="_fed_an_ua_tag" src="https://www.glerl.noaa.gov/js/analytics/Universal-Federated-Analytics.1.0.js?agency=NOAA&amp;subagency=GLERL"></script>
+
+        <!-- END ANALYTICS -->
+
+    </head>
+
+    <body onload="init(null);">
+        <a href="https://www.glerl.noaa.gov/metdata/chi/#main-content" name="skipnav" class="visuallyhidden">Skip to main content</a>
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong>
+            browser. Please <a href="http://browsehappy.com/">upgrade your
+            browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- BEGIN INTERFACE CONTENT -->
+
+        <!-- BEGIN HEADER -->
+
+        <div class="primaryWrapper" id="mainHeader" role="banner">
+            <div id="glerlBannerNav">
+                <div id="glerlBannerInnerNav">
+                    <div id="glerlLogoContainer">
+                        <a class="logoLink" href="https://www.glerl.noaa.gov/">
+                            <!--<img id="glerlLogo" alt="Go to GLERL Home Page" height="75" src="/images/glerlLogoInvertNoDefSmall.png" />-->
+                            <img id="glerlLogo" alt="Go to GLERL Home Page" height="75" src="./weather-site_files/GLERLLogo_white.png">
+                        </a>
+                    </div>
+                    <div id="glerlDef">
+                        NOAA - Great Lakes Environmental Research Laboratory
+                    </div>
+                    <div id="noaaLogoOnlyContainer">
+                        <a class="logoLink" id="noaaLogoHead" href="http://www.noaa.gov/" target="_blank">
+                            <img alt="Link to NOAA Page" width="60" height="60" src="./weather-site_files/noaa_white_rim_web.png">
+                        </a>
+                    </div>
+                    <div id="headerNavBar" role="menubar">
+                        <nav>
+							<a class="headerNavButton headerNavBarLink" href="https://www.glerl.noaa.gov/">Home</a>
+                            <a class="headerNavButton headerNavBarLink" href="https://www.glerl.noaa.gov/quickLinks.html">Quick Links</a>
+                            <a class="headerNavButton headerNavBarLink" href="https://www.glerl.noaa.gov/about/">About Us</a>
+                            <a class="headerNavButton headerNavBarLink" href="https://www.glerl.noaa.gov/res/">Research</a>
+                            <a class="headerNavButton headerNavBarLink" href="https://www.glerl.noaa.gov/data/">Data &amp; Products</a>
+                            <a class="headerNavButton headerNavBarLink" href="https://www.glerl.noaa.gov/pubs/">Publications</a>
+                            <a class="headerNavButton headerNavBarLink" href="https://www.glerl.noaa.gov/education/">Education</a>
+                        </nav>
+                    </div>
+                    <div id="socialMediaBar">
+                        <a class="socialMediaButton" href="https://www.facebook.com/noaa.glerl" target="_blank">
+                            <img width="30" height="30" alt="Go to GLERL&#39;s Facebook Page" src="./weather-site_files/fbIcon.png"></a>
+                        <a class="socialMediaButton" href="https://twitter.com/NOAA_GLERL" target="_blank">
+                            <img width="30" height="30" alt="Go to GLERL&#39;s Twitter Page" src="./weather-site_files/twIcon.png"></a>
+                        <a class="socialMediaButton" href="https://www.flickr.com/photos/noaa_glerl/" target="_blank">
+                            <img width="30" height="30" alt="Go to GLERL&#39;s Flickr Photo Album" src="./weather-site_files/flickrIcon.png"></a>
+                        <a class="socialMediaButton" href="https://www.youtube.com/channel/UCkfyVwJfamXDTM1hWEwzrHw" target="_blank">
+                            <img width="30" height="30" alt="Go to GLERL&#39;s YouTube Channel" src="./weather-site_files/ytIcon.png"></a>
+						<a class="socialMediaButton" href="https://noaaglerl.wordpress.com/" target="_blank">
+                            <img width="30" height="30" alt="Go to GLERL&#39;s Blog" src="./weather-site_files/WPiconRC.png"></a>
+                    </div>
+
+                    <form id="glerlSearchBar" method="get" action="http://search.usa.gov/search" role="form">
+						<input type="hidden" name="v:project" value="firstgov">
+						<input type="text" id="glerlSearchField" name="query" placeholder="Enter query here..." role="textbox" title="Enter a search query here and then click &#39;Search&#39;"><br>
+						<!--<fieldset>
+						<legend>Scope: </legend>
+						<input type="radio" name="affiliate" id="affiliate1" checked="checked" value="NOAA-GLERL" role='radio' aria-checked="true"/>
+						<label for="affiliate1">GLERL</label>
+						<input type="radio" name="affiliate" id="affiliate2" value="noaa.gov" role='radio' aria-checked="false"/>
+						<label for="affiliate2">NOAA</label>
+						</fieldset>-->
+						<label for="affiliate">Scope: </label>
+						<select name="affiliate" id="affiliate">
+							<option value="NOAA-GLERL">GLERL</option>
+							<option value="noaa.gov">NOAA</option>
+						</select>
+						<input type="submit" value="Search" class="glerlSearchButton" role="button">
+					</form>
+
+                </div>
+            </div>
+        </div>
+						<!-- END HEADER -->
+
+        <div class="primaryWrapper" id="mainContent" role="main">
+            <div id="mainContentInner">
+                <a id="main-content"></a>
+                <!-- BEGIN MAIN CONTENT -->
+<!-- above text is from: www.glerl.noaa.gov/regularPageTemplate.html-->
+
+
+<style type="text/css">
+.red {
+   color: #AC1919;
+   font-style: italic;
+}
+.red2 {
+   color: #AC1919;
+   font-weight: bold;
+}
+.small {
+   font-size: 15px;
+}
+//a {text-decoration:none;}
+//a:hover {text-decoration:underline;}
+
+.narrower {line-height: 1.1em;}
+.narrower2 {line-height: 1.1em; font-size: 15px;}
+.narrower3 {line-height: 1.1em; font-size: 14px;}
+.narrower4 {line-height: 1.1em; font-size: 13px;}
+
+.rt {text-align: right;}
+
+td {vertical-align: top;}
+
+.brdr {border: 1px solid black;}
+
+</style>
+
+<!-- END OF NEW HEADER - G. Lang -->
+
+
+
+
+
+
+
+<table class="centeredTable" summary="">
+<tbody><tr>
+
+<td class="small" colspan="3">
+Back to <a href="https://www.glerl.noaa.gov/metdata/">Met Station Array Page</a><br>
+<!--<a href="../info.html">Info</a>&nbsp;|-->
+<a href="https://www.glerl.noaa.gov/metdata/mil/">Milwaukee</a>&nbsp;|
+Chicago&nbsp;|
+<a href="https://www.glerl.noaa.gov/metdata/mcy/">Michigan&nbsp;City</a>&nbsp;|
+<a href="https://www.glerl.noaa.gov/metdata/shv/">South Haven</a>&nbsp;|
+<a href="https://www.glerl.noaa.gov/metdata/mkg/">Muskegon</a>&nbsp;|
+<a href="https://www.glerl.noaa.gov/metdata/apn/">Alpena</a>&nbsp;|
+<a href="https://www.glerl.noaa.gov/metdata/tbi/">Thunder&nbsp;Bay&nbsp;Island</a>&nbsp;|
+<a href="https://www.glerl.noaa.gov/metdata/tol2/">Toledo&nbsp;Light&nbsp;#2</a>
+<h1>Real-Time Meteorological Observation Network<br><span class="red">Chicago, IL</span>
+<span class="small">&nbsp;(CHII2)&nbsp;&nbsp;Harrison-Dever Crib, approx. 2.75 miles offshore</span></h1>
+See <a href="https://www.glerl.noaa.gov/metdata/chi/metadata.html">Metadata File</a> for full description of instruments and parameters, as well as site maps.
+
+   </td></tr>
+   <tr><td>
+
+   <strong>Conditions at 1:50 pm CST on 12/31/2017 (DOY 365 19:50 GMT)</strong>
+   <br><span class="small">(Updated at about 08,23,38,53 minutes past the hour)</span>
+
+
+   <table class="centeredTable" summary="">
+<tbody><tr><td class="brdr"><strong>Wind Speed:</strong> &nbsp; </td>
+     <td class="brdr">18.5&nbsp;kts&nbsp;&nbsp;&nbsp;(9.5&nbsp;m/s)</td></tr>
+   <tr><td class="brdr"><strong>Max Wind Speed:</strong> &nbsp; </td>
+     <td class="brdr">22.2 kts&nbsp;&nbsp;&nbsp;(11.4&nbsp;m/s)</td></tr>
+   <tr><td class="brdr"><strong>Wind Direction:</strong> &nbsp; </td>
+     <td class="brdr">313° (NW)</td></tr>
+   <tr><td class="brdr"><strong>Air Temperature:</strong> &nbsp; </td>
+     <td class="brdr">13.1 °F &nbsp; (-10.5 °C)</td></tr>
+<tr><td class="brdr"><strong>Wind Chill:</strong> &nbsp; </td>
+      <td class="brdr">-5.3 °F &nbsp; (-20.7 °C)</td></tr>
+      <tr><td class="brdr"><strong>Dew Point:</strong> &nbsp; </td>
+	<td class="brdr">0.7 °F &nbsp; (-17.4 °C)</td></tr>
+      <tr><td class="brdr"><strong>Relative Humidity:</strong> &nbsp; </td>
+	<td class="brdr">57.3 %</td></tr>
+<tr><td colspan="2" class="centeredContent"><a href="https://www.glerl.noaa.gov/metdata/plot_3hr.php?site=chi&amp;units=e#metdata" title="chi 3 hr Data">Data</a> &amp;
+<a href="https://www.glerl.noaa.gov/metdata/plot_3hr.php?site=chi&amp;units=e#top" title="chi 3 hr Plots">Plots</a> of Previous 3 Hours (2 minute increments)</td></tr>
+<tr><td colspan="2" class="centeredContent"><a href="https://www.glerl.noaa.gov/metdata/plot_5dy.php?site=chi&amp;units=e#metdata" title="chi 5 day Data">Data</a> &amp;
+<a href="https://www.glerl.noaa.gov/metdata/plot_5dy.php?site=chi&amp;units=e#top" title="chi 5 day Data">Plots</a> of Previous 5 Days (hourly increments)</td></tr>
+<tr><td colspan="2" class="centeredContent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.glerl.noaa.gov/metdata/chi/windrose1dy.png">1&nbsp;Day&nbsp;Windrose&nbsp;Plot</a>,&nbsp;<a href="https://www.glerl.noaa.gov/metdata/chi/windrose5dy.png">5&nbsp;Day&nbsp;Windrose&nbsp;Plot</a>,&nbsp;<a href="http://www.wcc.nrcs.usda.gov/climate/windrose.html">(explanation)</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+</tbody></table>
+</td>
+ <td rowspan="2">
+ <div class="centeredContent">
+         <span class="small">Click on image to enlarge<br>(images updated 6X per hour)
+	 <br><a href="https://www.glerl.noaa.gov/metdata/chi/webcaminfo.txt">Webcam Location &amp; Info</a>
+	    <br><a href="https://www.glerl.noaa.gov/metdata/chi/chi1.jpg"><img src="./weather-site_files/chi1-tn.jpg" width="384" alt="[Live Webcam Image from Chicago, IL Met Station Camera 1]"></a>
+	    <br><a href="https://www.glerl.noaa.gov/metdata/chi/chi2.jpg"><img src="./weather-site_files/chi2-tn.jpg" width="384" alt="[Live Webcam Image from Chicago, IL Met Station Camera 2]"></a>
+	    <br><a href="https://www.glerl.noaa.gov/metdata/chi/chi3.jpg"><img src="./weather-site_files/chi3-tn.jpg" width="384" alt="[Live Webcam Image from Chicago, IL Met Station Camera 3]"></a>
+
+	 <br>6-hr animations: 
+	 <a href="https://www.glerl.noaa.gov/metdata/anim.php?site=chi&amp;cam=1&amp;size=full" title="CHI 1 animation">1</a>&nbsp;
+	 <a href="https://www.glerl.noaa.gov/metdata/anim.php?site=chi&amp;cam=2&amp;size=full" title="CHI 2 animation">2</a>&nbsp;
+	 <a href="https://www.glerl.noaa.gov/metdata/anim.php?site=chi&amp;cam=3&amp;size=full" title="CHI 3 animation">3</a>
+
+         <br>Previous 48 images (top of hour only):
+	 <a href="https://www.glerl.noaa.gov/metdata/chi/animate_webcams/cam1/frame00.html" title="CHI 1 frames">1</a>&nbsp;
+	 <a href="https://www.glerl.noaa.gov/metdata/chi/animate_webcams/cam2/frame00.html" title="CHI 2 frames">2</a>&nbsp;
+	 <a href="https://www.glerl.noaa.gov/metdata/chi/animate_webcams/cam3/frame00.html" title="CHI 3 frames">3</a>
+
+         <br><a href="https://www.glerl.noaa.gov/metdata/chi/images/">All Images (past 14 days)</a>
+
+         <br><br>
+         Nearby Webcams (external sites): 
+         <br><a href="http://www.lakevision.com/">Chicago, facing east</a> courtesy of LakeVision.com
+         <br><a href="http://www.luc.edu/webcam/lsc/">Loyola University Lake Shore Campus</a>
+         <br><a href="http://abc7chicago.com/weather/cams/">Loop and Lake Michigan</a> courtesy of ABC News
+<!--         <br><a href="http://www.mwhazecam.net/adler.html">Looking Downtown Chicago courtesy of MW hazecam</a>-->
+<!--         <br><a href="http://www.mwhazecam.net/chicago.html">Looking northwest from Navy Pier courtesy of MW hazecam</a>-->
+<!--         <br><a href="http://static.cbslocal.com/cbs/wbbm/webcams/cam2_HancockCam.jpg">Looking north from John Hancock Tower</a>-->
+<!--         <br><a href="http://www.adlerplanetarium.org/skyeye/index.shtml">Views SW through NW from Adler Planetarium</a>-->
+         <br><br>
+
+</span>
+<script language="JavaScript1.2" type="text/javascript" src="./weather-site_files/hideaddr.js"></script>
+
+<noscript>
+&lt;strong&gt;
+NOTE: Your browser appears to have JavaScript disabled.&lt;br&gt;
+You must enable Javascript in order to view email addresses.&lt;br&gt;
+&lt;/strong&gt;
+</noscript>
+   <script language="JavaScript" type="text/javascript">
+   <!--
+   hideaddr2("Comments?","gregory.lang","noaa.gov","?subject=Chicago, IL Met Station");//--></script><a href="mailto:gregory.lang@noaa.gov?subject=Chicago,%20IL%20Met%20Station">Comments?</a><br>
+ </div>
+</td>
+</tr>
+<tr><td class="brdr">
+<!-- Begin 18-hr table -->
+<table class="centeredTable" summary="">
+<tbody><tr><th scope="col" colspan="11" class="centeredContent">----------&nbsp;Previous&nbsp;18&nbsp;Hours&nbsp;(at&nbsp;top&nbsp;of&nbsp;hour)&nbsp;&nbsp;[English]&nbsp;[<a href="https://www.glerl.noaa.gov/metdata/chi/met1m.html">Metric</a>]&nbsp;----------</th></tr>
+<tr><th scope="col" class="rt">YEAR</th><th scope="col" class="rt">DOY
+</th><th scope="col" class="rt">CST
+</th><th scope="col" class="rt">Wind<br>Spd<br>kts
+</th><th scope="col" class="rt">Wind<br>Gust<br>kts
+</th><th scope="col" class="rt">Peak<br>Wind<br>kts
+</th><th scope="col" class="rt">Wind<br>Dir<br>deg
+</th><th scope="col" class="rt">Air<br>Tmp<br>F
+</th><th scope="col" class="rt">Wind<br>Chill<br>F
+</th><th scope="col" class="rt">Dew<br>Pt<br>F
+</th><th scope="col" class="rt">Rel<br>Hum<br>%</th></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">1300</td><td class="rt">   17.1</td><td class="rt">  19.8</td><td class="rt">  22.2</td><td class="rt">  307</td><td class="rt">  12.7</td><td class="rt">  -5.2</td><td class="rt">   0.9</td><td class="rt">  58.9</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">1200</td><td class="rt">   14.8</td><td class="rt">  18.5</td><td class="rt">  20.4</td><td class="rt">  301</td><td class="rt">  11.5</td><td class="rt">  -5.7</td><td class="rt">   0.7</td><td class="rt">  61.6</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">1100</td><td class="rt">   13.8</td><td class="rt">  16.5</td><td class="rt">  19.2</td><td class="rt">  300</td><td class="rt">  10.0</td><td class="rt">  -7.0</td><td class="rt">   0.4</td><td class="rt">  64.8</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">1000</td><td class="rt">   11.7</td><td class="rt">  14.2</td><td class="rt">  15.4</td><td class="rt">  299</td><td class="rt">   7.9</td><td class="rt">  -8.4</td><td class="rt">   0.7</td><td class="rt">  72.1</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">0900</td><td class="rt">   14.4</td><td class="rt">  16.7</td><td class="rt">  16.7</td><td class="rt">  306</td><td class="rt">   6.4</td><td class="rt"> -12.0</td><td class="rt">   0.8</td><td class="rt">  77.3</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">0800</td><td class="rt">   12.6</td><td class="rt">  14.0</td><td class="rt">  16.9</td><td class="rt">  295</td><td class="rt">   5.2</td><td class="rt"> -12.5</td><td class="rt">  -0.9</td><td class="rt">  75.6</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">0700</td><td class="rt">   14.0</td><td class="rt">  16.5</td><td class="rt">  16.5</td><td class="rt">  302</td><td class="rt">   5.2</td><td class="rt"> -13.4</td><td class="rt">  -1.4</td><td class="rt">  74.1</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">0600</td><td class="rt">   10.7</td><td class="rt">  12.1</td><td class="rt">  16.7</td><td class="rt">  299</td><td class="rt">   4.8</td><td class="rt"> -11.6</td><td class="rt">  -1.6</td><td class="rt">  74.5</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">0500</td><td class="rt">   12.4</td><td class="rt">  13.6</td><td class="rt">  19.1</td><td class="rt">  310</td><td class="rt">   4.5</td><td class="rt"> -13.3</td><td class="rt">  -2.3</td><td class="rt">  73.2</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">0400</td><td class="rt">   14.6</td><td class="rt">  15.6</td><td class="rt">  17.3</td><td class="rt">  270</td><td class="rt">   4.3</td><td class="rt"> -14.9</td><td class="rt">  -3.0</td><td class="rt">  71.6</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">0300</td><td class="rt">    8.9</td><td class="rt">  10.1</td><td class="rt">  15.7</td><td class="rt">  306</td><td class="rt">   4.6</td><td class="rt"> -10.4</td><td class="rt">  -2.3</td><td class="rt">  72.8</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">0200</td><td class="rt">   11.1</td><td class="rt">  12.4</td><td class="rt">  13.4</td><td class="rt">  311</td><td class="rt">   4.3</td><td class="rt"> -12.6</td><td class="rt">  -2.8</td><td class="rt">  72.2</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">0100</td><td class="rt">   11.5</td><td class="rt">  12.4</td><td class="rt">  14.4</td><td class="rt">  300</td><td class="rt">   4.1</td><td class="rt"> -13.1</td><td class="rt">  -3.2</td><td class="rt">  71.5</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">365</td><td class="rt">0000</td><td class="rt">   12.6</td><td class="rt">  15.4</td><td class="rt">  15.4</td><td class="rt">  295</td><td class="rt">   3.4</td><td class="rt"> -14.8</td><td class="rt">  -4.1</td><td class="rt">  70.8</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">364</td><td class="rt">2300</td><td class="rt">   14.0</td><td class="rt">  17.3</td><td class="rt">  17.7</td><td class="rt">  294</td><td class="rt">   3.2</td><td class="rt"> -15.9</td><td class="rt">  -5.3</td><td class="rt">  67.5</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">364</td><td class="rt">2200</td><td class="rt">   14.2</td><td class="rt">  16.9</td><td class="rt">  18.1</td><td class="rt">  316</td><td class="rt">   3.6</td><td class="rt"> -15.6</td><td class="rt">  -6.0</td><td class="rt">  64.3</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">364</td><td class="rt">2100</td><td class="rt">   16.1</td><td class="rt">  18.5</td><td class="rt">  21.2</td><td class="rt">  290</td><td class="rt">   3.6</td><td class="rt"> -16.7</td><td class="rt">  -6.1</td><td class="rt">  64.0</td></tr>
+<tr><td class="rt"> 2017</td><td class="rt">364</td><td class="rt">2000</td><td class="rt">   17.7</td><td class="rt">  20.0</td><td class="rt">  22.6</td><td class="rt">  300</td><td class="rt">   4.3</td><td class="rt"> -16.5</td><td class="rt">  -4.9</td><td class="rt">  65.3</td></tr>
+</tbody></table>
+<span class="small">Note: Peak wind is max wind gust during entire hour</span>
+<br><span class="small">Note: Wind chill is set to -99 if air temp &gt; 40 F or wind speed &lt; 3 mph</span>
+<!-- End 18-hr table -->
+</td>
+</tr>
+
+<tr><td colspan="3">
+<br>&nbsp; &nbsp; &nbsp; <img src="./weather-site_files/arrow1.gif" alt="right arrow"> Click here for today's 2-minute 
+data: <a href="https://www.glerl.noaa.gov/metdata/chi/2017/20171231.04t.txt">20171231.04t.txt</a>, <a href="https://www.glerl.noaa.gov/metdata/chi/metadata.html">data format (metadata)</a><br>
+&nbsp; &nbsp; &nbsp; <img src="./weather-site_files/arrow1.gif" alt="right arrow"> Click here for past data:
+   <a href="https://www.glerl.noaa.gov/metdata/chi/2017.html">2017</a>&nbsp;|&nbsp;<a href="https://www.glerl.noaa.gov/metdata/chi/archive/">Archive</a>
+
+<br><br>Access current marine observations on your mobile device.
+See <a href="http://www.ndbc.noaa.gov/mobile/"><span class="red">NDBC's mobile access page</span></a>.
+<br>These data are also available from <a href="http://www.ndbc.noaa.gov/station_page.php?station=CHII2">NDBC website</a> and <a href="http://www.ndbc.noaa.gov/dial.shtml">NDBC's Dial-a-Buoy Program</a>. 
+<br><span class="red">See also <a href="http://www.nws.noaa.gov/om/marine/zone/gtlakes/lotmz.htm">NWS Marine Forecast for this area</a>, and <a href="https://www.weather.gov/greatlakes/beachhazards">NWS Recreational Beach Forecast</a></span>
+<br><br><span class="small"><a href="https://www.glerl.noaa.gov/home/notice.html#realtime">Realtime Data Disclaimer</a></span>
+         <br>Special thanks to
+         <a href="https://www.cityofchicago.org/city/en.html">City of Chicago, IL</a> / <a href="https://www.cityofchicago.org/city/en/depts/water.html">Water Department</a>, 
+         <a href="http://www.usace.army.mil/">USACE</a>
+<br>
+<br><div class="subMenuRule"></div><br>
+   <p class="centeredContent"><strong>Additional Great Lakes Meteorological Observations</strong></p>
+
+   » <a href="http://www.crh.noaa.gov/grr/marine/index.php">NWS, Grand Rapids Office: 
+   Near-Realtime Marine Weather, includes current conditions and forecasts</a>
+
+   <br>» <a href="http://www.crh.noaa.gov/dtx/">NWS, White Lake Office: Near-Realtime 
+   Marine Weather, includes current conditions and forecasts</a>
+
+   <br>» <a href="http://www.ndbc.noaa.gov/?lat=44.0&amp;lon=-83.5&amp;zoom=5&amp;type=h&amp;status=r&amp;pgm=&amp;op=&amp;ls=false">NDBC Great Lakes
+   ImageMap showing U.S. and Canadian Buoys and C-MAN Stations</a>
+
+   <br>» <a href="http://coastwatch.glerl.noaa.gov/marobs"><span class="red">NOAA 
+   CoastWatch Great Lakes NOAAPORT Data, includes all station types</span></a>
+
+   <br>» <a href="http://nowcoast.noaa.gov/">NOAA's NowCoast: Web mapping portal to 
+   real-time coastal observations</a>
+
+   <br>» <a href="http://www.iwindsurf.com/">Winds courtesy of iWindsurf.com</a>
+
+   <br>» <a href="http://www.nws.noaa.gov/om/marine/gtlakes.htm">NWS
+   Great Lakes Marine Text <strong>Forecasts</strong> by Zone</a>
+
+   <br>» <a href="https://www.glerl.noaa.gov/res/glcfs/wtemp.html">Links to Great Lakes Water Temperature, Wind/Wave Data, &amp; Water Levels</a>
+
+   <br>» <a href="http://www.great-lakes.net/infocenter/images/webcams.html">Additional Great Lakes WebCams from GLIN</a>
+
+   <!--<br><br>&nbsp;<a href="wwwstats/">WWW Stats</a>-->
+   <br>» <a href="http://www.great-lakes.net/">GLIN: Great Lakes Information Network</a><br>
+<br>
+<script language="JavaScript" type="text/javascript">
+<!--
+hideaddr2("Comments?","gregory.lang","noaa.gov","?subject=Chicago, IL Met Station");//--></script><a href="mailto:gregory.lang@noaa.gov?subject=Chicago,%20IL%20Met%20Station">Comments?</a><br>
+
+</td></tr></tbody></table>
+
+<!-- below text is from: www.glerl.noaa.gov/regularPageTemplate.html-->
+                <!-- END MAIN CONTENT -->
+            </div>
+        </div><!-- /content -->
+
+        <!-- BEGIN FOOTER -->
+
+        <div class="primaryWrapper" id="mainFooter" role="contentinfo">
+            <div class="clearfix" id="mainFooterInner">
+				<div class="centeredContent" id="mainFooterNav">
+					<a class="linkInADarkSpot" href="https://www.glerl.noaa.gov/">Home</a> | 
+					<a class="linkInADarkSpot" href="https://www.glerl.noaa.gov/home/contactus.html">Contact</a> |
+					<a class="linkInADarkSpot" href="https://www.glerl.noaa.gov/home/accessibility.html">Accessibility</a> | 
+					<a class="linkInADarkSpot" href="https://www.glerl.noaa.gov/home/sitemap.html">Site Map</a> | 
+					<a class="linkInADarkSpot" href="https://www.glerl.noaa.gov/home/privacy.html">Privacy Policy</a> | 
+					<a class="linkInADarkSpot" href="https://www.glerl.noaa.gov/home/feedback.html">Feedback</a> | 
+					<a class="linkInADarkSpot" href="https://www.glerl.noaa.gov/home/notice.html">Disclaimer</a> |
+					<a class="linkInADarkSpot" href="http://intranet/">GLERL Only</a><br>
+					<!--<a class="footerContacts" href="/"><strong>NOAA-GLERL</strong></a> - 
+					4840 S. State Rd., Ann Arbor, MI 48108-9719, (734) 741-2235,
+					<script type="text/javascript"> <!--
+						var name = "www.glerl";
+						var domain = "noaa.gov"; 
+						document.write('<a class="linkInADarkSpot" href=\"mailto:' + name + '@' + domain + '\">');
+						document.write(name + '@' + domain + '<\/a>');
+						//-->
+					<!--</script><br />
+					<a class="footerContacts" href="/lmfs/"><strong>Lake Michigan Field Station (LMFS)</strong></a> - 
+					1431 Beach St., Muskegon, MI 49441-1098, (231) 755-3831<br />-->
+					<a class="linkInADarkSpot" id="oarLink" href="http://research.noaa.gov/" target="_blank">
+						Office of Oceanic and Atmospheric Research (OAR)
+					</a>
+				</div><br>
+				
+				<a class="logoLink" id="docLogo" href="http://www.commerce.gov/" target="_blank">
+					<img alt="Link to Department of Commerce Page" width="50" height="50" src="./weather-site_files/docBannerLogo.png">
+				</a> 
+					
+				<a class="logoLink" id="noaaLogoFoot" href="http://www.noaa.gov/" target="_blank">
+					<img alt="Link to NOAA Page" width="50" height="50" src="./weather-site_files/noaa_white_rim_web.png">                            
+				</a>   
+				
+            </div>                
+        </div>
+						        <!-- END FOOTER -->
+        
+        <!-- END INTERFACE CONTENT -->
+        
+        <!-- BEGIN FOOTER ANALYTICS BLOCK -->
+        
+        <!-- Piwik -->
+        <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+            var u="//www.glerl.noaa.gov/analytics/";
+            _paq.push(['setTrackerUrl', u+'piwik.php']);
+            _paq.push(['setSiteId', 1]);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript>&lt;p&gt;&lt;img src="//www.glerl.noaa.gov/analytics/piwik.php?idsite=1" style="border:0;" alt="" /&gt;&lt;/p&gt;</noscript>
+        <!-- End Piwik Code -->
+        
+        <!-- END FOOTER ANALYTICS BLOCK -->
+    
+
+</body></html>
