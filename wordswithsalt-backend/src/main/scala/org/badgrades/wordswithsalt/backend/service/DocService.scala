@@ -7,10 +7,10 @@ import org.jsoup.nodes.{Document, Element}
 
 object DocService {
 
-  val DataTableSelector = "table.centeredTable"
+  val DataTableSelector = "table.centeredTable > tbody"
 
   def parse(document: Document): RawWeatherData = {
-    val tableBody: Element = document.selectFirst(DataTableSelector + "> tbody")
+    val tableBody: Element = document.selectFirst(DataTableSelector)
     tableBody.children().forEach(tableRow => println(tableRow))
 
     RawWeatherData(
