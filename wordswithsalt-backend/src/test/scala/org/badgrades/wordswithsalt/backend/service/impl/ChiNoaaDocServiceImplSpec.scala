@@ -1,4 +1,4 @@
-package org.badgrades.wordswithsalt.backend.service
+package org.badgrades.wordswithsalt.backend.service.impl
 
 import java.io.File
 
@@ -8,15 +8,15 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.scalatest.WordSpec
 
-class DocServiceSpec extends WordSpec {
+class ChiNoaaDocServiceImplSpec extends WordSpec {
 
-  val testSiteFile = new File(classOf[DocServiceSpec].getResource("weather-site.html").toURI)
+  val testSiteFile = new File(getClass.getResource("/weather-site.html").getPath)
 
   "A DocService" must {
     val doc: Document = Jsoup.parse(testSiteFile, "UTF-8", Constants.WeatherDataUrl)
 
     "parse a web page into valid weather data" in {
-      val rawWeatherData: RawWeatherData = DocService.parse(doc)
+      val rawWeatherData: RawWeatherData = ChiNoaaDocServiceImpl.parse(doc)
     }
   }
 }

@@ -1,27 +1,19 @@
 package org.badgrades.wordswithsalt.backend.service
 
-import java.time.Instant
-
 import org.badgrades.wordswithsalt.backend.domain.RawWeatherData
-import org.jsoup.nodes.{Document, Element}
+import org.jsoup.nodes.Document
 
-object DocService {
+/**
+  * A service for parsing weather data from scraped web pages. Each site
+  * should have their own implementation of DocService
+  */
+trait DocService {
 
-  val DataTableSelector = "table.centeredTable > tbody"
-
-  def parse(document: Document): RawWeatherData = {
-    val tableBody: Element = document.selectFirst(DataTableSelector)
-    tableBody.children().forEach(tableRow => println(tableRow))
-
-    RawWeatherData(
-      timestamp = Instant.now(),
-      windSpeed = "",
-      maxWindSpeed = "",
-      windDirectionInDegrees = "",
-      airTemperature = "",
-      windChill = "",
-      dewPoint = "",
-      relativeHumidity = ""
-    )
-  }
+  /**
+    * Takes in a Jsoup document and parses it into RawWeatherData
+    *
+    * @param doc The document to parse
+    * @return Raw weather data, not converted to legitimate units
+    */
+  def parse(doc: Document): RawWeatherData
 }
