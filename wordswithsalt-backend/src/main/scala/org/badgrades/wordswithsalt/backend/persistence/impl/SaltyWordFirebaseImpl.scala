@@ -11,9 +11,9 @@ import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.util.Random
 
 /**
-  * Flushing this down the toilet. Firebase is neat but Cassandra is for the cool kids. Also it's crazy
-  * how non-performant my implementation of this is. :(
+  * Flushing this down the toilet. RIP Salty Firebase Prince
   */
+@Deprecated
 class SaltyWordFirebaseImpl(db: FirebaseDatabase) extends SaltyWordRepo with LazyLogging {
   import SaltyWordFirebaseImpl._
 
