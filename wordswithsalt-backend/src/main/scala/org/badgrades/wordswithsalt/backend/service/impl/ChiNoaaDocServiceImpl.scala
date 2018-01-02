@@ -8,7 +8,6 @@ import org.jsoup.nodes.{Document, Element}
 object ChiNoaaDocServiceImpl {
   def parse(document: Document): RawWeatherData = {
     val tableBody: Element = document.select("table.centeredTable > tbody").get(1) // Get the second table, the first is just an un-parsable wrapper
-    tableBody.children().forEach(tableRow => println(tableRow))
     def parseRowWithTitle(title: String) = tableBody.findRowWithTitle(title).flatMap(row => row.readRowValue()).getOrElse("")
 
     RawWeatherData(
