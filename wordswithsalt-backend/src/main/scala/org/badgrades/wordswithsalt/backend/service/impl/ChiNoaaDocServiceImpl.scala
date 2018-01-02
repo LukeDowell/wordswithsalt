@@ -24,4 +24,23 @@ object ChiNoaaDocServiceImpl {
       relativeHumidity = ""
     )
   }
+
+  /**
+    * Extension methods for an element that contains a list of <tr> elements with title and
+    * value child elements
+    */
+  private[impl] implicit class ChiNoaaTableExtensions(el: Element) {
+
+    /**
+      * Returns an option with the first element node that has a "<td>" element that matches the provided text, or None if not found
+      * @param text The text to match for
+      */
+    def findRowWithTitle(text: String): Option[Element] = Option(el.selectFirst(s"tr > td:contains($text)"))
+
+    /**
+      * Parses a "<tr>" element with two child "<td>" elements.
+      * The first will have a title and the second will have a value.
+      */
+    def readRowValue(): Option[String] = Option(el.children().last().text().replace("&nbsp", ""))
+  }
 }
