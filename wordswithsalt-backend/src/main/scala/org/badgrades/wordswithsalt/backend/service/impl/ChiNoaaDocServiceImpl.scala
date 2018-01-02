@@ -6,22 +6,20 @@ import org.badgrades.wordswithsalt.backend.domain.RawWeatherData
 import org.jsoup.nodes.{Document, Element}
 
 object ChiNoaaDocServiceImpl {
-
-  val DataTableSelector = "table.centeredTable > tbody"
-
   def parse(document: Document): RawWeatherData = {
-    val tableBody: Element = document.select(DataTableSelector).get(1) // Get the second table, the first has no data
+    val tableBody: Element = document.select("table.centeredTable > tbody").get(1) // Get the second table, the first is just an un-parsable wrapper
     tableBody.children().forEach(tableRow => println(tableRow))
+    def parseRowWithTitle(title: String) = tableBody.findRowWithTitle(title).flatMap(row => row.readRowValue()).getOrElse("")
 
     RawWeatherData(
       timestamp = Instant.now(),
-      windSpeed = "",
-      maxWindSpeed = "",
-      windDirectionInDegrees = "",
-      airTemperature = "",
-      windChill = "",
-      dewPoint = "",
-      relativeHumidity = ""
+      windSpeed = parseRowWithTitle("Wind Speed:"),
+      maxWindSpeed = parseRowWithTitle("Max Wind Speed:"),
+      windDirectionInDegrees = parseRowWithTitle("Wind Direction:"),
+      airTemperature = parseRowWithTitle("Air Temperature:"),
+      windChill = parseRowWithTitle("Wind Chill:"),
+      dewPoint = parseRowWithTitle("Dew Point:"),
+      relativeHumidity = parseRowWithTitle("Relative Humidity:")
     )
   }
 
@@ -32,13 +30,13 @@ object ChiNoaaDocServiceImpl {
   private[impl] implicit class ChiNoaaTableExtensions(el: Element) {
 
     /**
-      * Returns an option with the first element node that has a "<td>" element that matches the provided text, or None if not found
+      * Returns an option of the first <tr> element that has a child <td> element containing the provided text.
       * @param text The text to match for
       */
-    def findRowWithTitle(text: String): Option[Element] = Option(el.selectFirst(s"tr > td:contains($text)"))
+    def findRowWithTitle(text: String): Option[Element] = Option(el.selectFirst(s"tr:has(td:contains($text))"))
 
     /**
-      * Parses a "<tr>" element with two child "<td>" elements.
+      * Parses a <tr> element with two child <td> elements.
       * The first will have a title and the second will have a value.
       */
     def readRowValue(): Option[String] = Option(el.children().last().text().replace("&nbsp", ""))

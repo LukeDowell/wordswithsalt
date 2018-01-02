@@ -7,7 +7,6 @@ import akka.pattern.pipe
 import org.badgrades.wordswithsalt.backend.actor.weather.WeatherDataPersistenceActor.WriteWeatherData
 import org.badgrades.wordswithsalt.backend.config.Constants
 import org.badgrades.wordswithsalt.backend.domain.RawWeatherData
-import org.badgrades.wordswithsalt.backend.service.DocService
 import org.badgrades.wordswithsalt.backend.service.impl.ChiNoaaDocServiceImpl
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document

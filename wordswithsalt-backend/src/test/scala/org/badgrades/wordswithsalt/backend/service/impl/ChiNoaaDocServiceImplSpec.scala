@@ -17,6 +17,7 @@ class ChiNoaaDocServiceImplSpec extends WordSpec {
 
     "parse a web page into valid weather data" in {
       val rawWeatherData: RawWeatherData = ChiNoaaDocServiceImpl.parse(doc)
+      println(rawWeatherData)
     }
   }
 }
