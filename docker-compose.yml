@@ -1,0 +1,23 @@
+version: "3"
+services:
+  wordswithsalt:
+    image:
+    deploy:
+      replicas: 3
+      resource:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "6969:6969"
+    networks:
+      - webnet
+
+#  cassandra:
+#    image: cassandra:3.11.1
+#    deploy:
+#      replicas: 3
+networks:
+  webnet:
