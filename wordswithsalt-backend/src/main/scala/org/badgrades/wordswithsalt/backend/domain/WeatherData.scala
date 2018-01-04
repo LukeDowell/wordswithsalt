@@ -4,22 +4,22 @@ import java.time.Instant
 
 /**
   *
-  * @param timestamp
-  * @param windSpeed
-  * @param maxWindSpeed
-  * @param windDirectionInDegrees
-  * @param airTemperature
-  * @param windChill
-  * @param dewPoint
-  * @param relativeHumidity
+  * @param timestamp The time this data was recorded
+  * @param windSpeed The current wind speed at the time of measurement
+  * @param maxWindSpeed The max wind speed for that day
+  * @param windDirectionInDegrees The wind direction in degrees
+  * @param airTemperature The air temperature at the time of measurement
+  * @param windChill The wind chill at the time of measurement
+  * @param dewPoint The dew point at the time of measurement
+  * @param relativeHumidity The relative humidity at the time of measurement
   */
-case class RawWeatherData(
-                           timestamp: Instant = Instant.now(),
-                           windSpeed: String,
-                           maxWindSpeed: String,
-                           windDirectionInDegrees: String,
-                           airTemperature: String,
-                           windChill: String,
-                           dewPoint: String,
-                           relativeHumidity: String
-                         )
+case class WeatherData(
+                        timestamp: Instant = Instant.now(),
+                        windSpeed: String,
+                        maxWindSpeed: String,
+                        windDirectionInDegrees: String,
+                        airTemperature: String,
+                        windChill: String,
+                        dewPoint: String,
+                        relativeHumidity: String
+                      )

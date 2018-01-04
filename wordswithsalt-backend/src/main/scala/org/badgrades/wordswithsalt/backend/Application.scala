@@ -18,7 +18,6 @@ object Application extends WordsWithSaltRoutes with StrictLogging {
   implicit val saltyWordDataActor: ActorRef = actorSystem.actorOf(SaltyWordActor.props, SaltyWordActor.Name)
 
   def main(args: Array[String]): Unit = {
-
     // Setup and bind web server
     val bindingFuture = Http().bindAndHandle(routes, Constants.Path, Constants.Port)
     logger.info(s"Server online at http://${Constants.Path}:${Constants.Port}")

@@ -2,15 +2,18 @@ package org.badgrades.wordswithsalt.backend.service.impl
 
 import java.time.Instant
 
-import org.badgrades.wordswithsalt.backend.domain.RawWeatherData
+import org.badgrades.wordswithsalt.backend.domain.WeatherData
 import org.jsoup.nodes.{Document, Element}
 
 object ChiNoaaDocServiceImpl {
-  def parse(document: Document): RawWeatherData = {
+  def parse(document: Document): WeatherData = {
     val tableBody: Element = document.select("table.centeredTable > tbody").get(1) // Get the second table, the first is just an un-parsable wrapper
-    def parseRowWithTitle(title: String) = tableBody.findRowWithTitle(title).flatMap(row => row.readRowValue()).getOrElse("")
+    def parseRowWithTitle(title: String) = tableBody.findRowWithTitle(title)
+      .flatMap(row => row.readRowValue())
+      .map(rowValue => rowValue.replace("&nbsp", ""))
+      .getOrElse("")
 
-    RawWeatherData(
+    WeatherData(
       timestamp = Instant.now(),
       windSpeed = parseRowWithTitle("Wind Speed:"),
       maxWindSpeed = parseRowWithTitle("Max Wind Speed:"),
@@ -36,8 +39,8 @@ object ChiNoaaDocServiceImpl {
 
     /**
       * Parses a <tr> element with two child <td> elements.
-      * The first will have a title and the second will have a value.
+      * The first will have a title and the second will have a value, which is the value that is returned.
       */
-    def readRowValue(): Option[String] = Option(el.children().last().text().replace("&nbsp", ""))
+    def readRowValue(): Option[String] = Option(el.children().last().text())
   }
 }

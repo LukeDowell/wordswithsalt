@@ -6,7 +6,7 @@ import akka.actor.{Actor, ActorLogging, ActorRef, Props, Terminated, Timers}
 import akka.pattern.pipe
 import org.badgrades.wordswithsalt.backend.actor.weather.WeatherDataPersistenceActor.WriteWeatherData
 import org.badgrades.wordswithsalt.backend.config.Constants
-import org.badgrades.wordswithsalt.backend.domain.RawWeatherData
+import org.badgrades.wordswithsalt.backend.domain.WeatherData
 import org.badgrades.wordswithsalt.backend.service.impl.ChiNoaaDocServiceImpl
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -35,11 +35,11 @@ class WeatherDataScrapingActor extends Actor with ActorLogging with Timers {
 
     case doc: Document =>
       log.info(s"Received document with title ${doc.title()}")
-      val parsedWeatherData: RawWeatherData = ChiNoaaDocServiceImpl.parse(doc)
+      val parsedWeatherData: WeatherData = ChiNoaaDocServiceImpl.parse(doc)
       log.info(s"Parsed $parsedWeatherData from document with title ${doc.title()}")
       persistenceActor ! WriteWeatherData(parsedWeatherData)
 
-    case Terminated(a) =>
+    case Terminated(_) =>
       log.warning(s"$PersistenceActorName died, replacing...")
       persistenceActor = createPersistenceActor
       context watch persistenceActor
