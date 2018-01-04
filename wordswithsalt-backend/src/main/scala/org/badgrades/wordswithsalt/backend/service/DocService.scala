@@ -1,6 +1,6 @@
 package org.badgrades.wordswithsalt.backend.service
 
-import org.badgrades.wordswithsalt.backend.domain.RawWeatherData
+import org.badgrades.wordswithsalt.backend.domain.WeatherData
 import org.jsoup.nodes.Document
 
 /**
@@ -15,5 +15,5 @@ trait DocService {
     * @param doc The document to parse
     * @return Raw weather data, not converted to legitimate units
     */
-  def parse(doc: Document): RawWeatherData
+  def parse(doc: Document): WeatherData
 }
