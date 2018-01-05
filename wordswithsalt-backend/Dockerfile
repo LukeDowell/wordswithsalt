@@ -1,4 +1,8 @@
-FROM frolvlad:alpine-scala:2.12
-VOLUME /tmp
-ARG JAR_FILE
-ADD ${JAR_FILE} app.jar
+FROM openjdk:8-jre-alpine
+
+RUN mkdir -p /opt/app
+WORKDIR /opt/app
+
+COPY ./build/libs/wordswithsalt-backend-0.0.1-SNAPSHOT-all.jar ./app.jar
+
+CMD ["java", "-jar", "app.jar"]
