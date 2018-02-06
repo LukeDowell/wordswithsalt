@@ -4,6 +4,7 @@ import akka.actor.{ActorRef, ActorSystem}
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import com.typesafe.scalalogging.StrictLogging
+import org.badgrades.wordswithsalt.backend.actor.cluster.ClusterMonitorActor
 import org.badgrades.wordswithsalt.backend.actor.weather.WeatherDataScrapingActor
 import org.badgrades.wordswithsalt.backend.actor.word.SaltyWordActor
 import org.badgrades.wordswithsalt.backend.config.Constants
@@ -28,5 +29,8 @@ object Application extends WordsWithSaltRoutes with StrictLogging {
       WeatherDataScrapingActor.props.withDispatcher(Constants.WeatherDispatcher),
       WeatherDataScrapingActor.Name
     )
+
+    logger.info("Creating ClusterMonitorActor...")
+    actorSystem.actorOf(ClusterMonitorActor.props)
   }
 }

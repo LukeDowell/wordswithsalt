@@ -25,7 +25,7 @@ class WeatherDataScrapingActor extends Actor with ActorLogging with Timers {
     log.info(s"Starting weather scraper")
     persistenceActor = createPersistenceActor
     context watch persistenceActor
-    timers.startPeriodicTimer(ScrapeKey, StartScrape, 10 seconds)
+    timers.startPeriodicTimer(ScrapeKey, StartScrape, 30 seconds)
   }
 
   override def receive: Receive = {

@@ -11,7 +11,7 @@ object ChiNoaaDocServiceImpl {
     def parseRowWithTitle(title: String) = tableBody.findRowWithTitle(title)
       .flatMap(row => row.readRowValue())
       .map(rowValue => rowValue.replace("&nbsp", ""))
-      .getOrElse("")
+      .getOrElse("Unable to Parse")
 
     WeatherData(
       timestamp = Instant.now(),

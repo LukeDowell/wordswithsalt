@@ -19,7 +19,6 @@ trait WordsWithSaltRoutes extends JsonSupport { this: StrictLogging =>
   implicit val ec: ExecutionContext
   implicit val actorMaterializer: ActorMaterializer
   implicit val timeout: Timeout = 3 seconds
-
   implicit val saltyWordDataActor: ActorRef
 
   val routes: Route =
